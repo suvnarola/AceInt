@@ -1,0 +1,175 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('textarea_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+window.focus();
+var request = "" + window.location;
+editor = requestParameter("editor");
+
+function initform() {
+	document.forms[0].name.value = unescape(request.match(new RegExp("^.*\?.*[?&]name=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]name=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].rows.value = unescape(request.match(new RegExp("^.*\?.*[?&]rows=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]rows=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].cols.value = unescape(request.match(new RegExp("^.*\?.*[?&]cols=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]cols=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].wrap.value = unescape(request.match(new RegExp("^.*\?.*[?&]wrap=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]wrap=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].onclick.value = unescape(request.match(new RegExp("^.*\?.*[?&]onclick=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]onclick=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].onchange.value = unescape(request.match(new RegExp("^.*\?.*[?&]onchange=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]onchange=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].onfocus.value = unescape(request.match(new RegExp("^.*\?.*[?&]onfocus=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]onfocus=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].onblur.value = unescape(request.match(new RegExp("^.*\?.*[?&]onblur=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]onblur=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].htmlclass.value = unescape(request.match(new RegExp("^.*\?.*[?&]htmlclass=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]htmlclass=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].htmlid.value = unescape(request.match(new RegExp("^.*\?.*[?&]htmlid=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]htmlid=([^&]+).*$", "i"), "$1") : "");
+}
+
+function inserttextarea(form) {
+	var name = form.name.value;
+	var rows = form.rows.value;
+	var cols = form.cols.value;
+	var wrap = form.wrap.value;
+	var onclick = form.onclick.value;
+	var onchange = form.onchange.value;
+	var onfocus = form.onfocus.value;
+	var onblur = form.onblur.value;
+	var htmlclass = form.htmlclass.value;
+	var htmlid = form.htmlid.value;
+	window.opener[editor].insertTextarea(name,cols,rows,wrap,onclick,onchange,onfocus,onblur,htmlclass,htmlid);
+	window.close();
+}
+
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="initform();">
+<form onSubmit="javascript:inserttextarea(this); return false;">
+<input type="hidden" name="type" value="text">
+<table width="100%" border="0" class="dtree">
+	<tr align="left" valign="top"> 
+		<td colspan="4" class="webeditor_window_title"><script>document.write(Text('textarea_title'));</script></td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('textarea_parameter'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('textarea_parameter_name'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="name" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('textarea_parameter_wrap'));</script></td>
+						<td class="webeditor_window_value"> 
+							<select name="wrap" style="width: 140px;">
+								<option value="">
+								<option value="off"><script>document.write(Text('textarea_parameter_wrap_off'));</script>
+								<option value="virtual"><script>document.write(Text('textarea_parameter_wrap_virtual'));</script>
+								<option value="physical"><script>document.write(Text('textarea_parameter_wrap_physical'));</script>
+								<option value="soft"><script>document.write(Text('textarea_parameter_wrap_soft'));</script>
+								<option value="hard"><script>document.write(Text('textarea_parameter_wrap_hard'));</script>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('textarea_size'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('textarea_size_columns'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="cols" size="5" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('textarea_size_rows'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="rows" size="5" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('textarea_events'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('textarea_events_onclick'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="onclick" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('textarea_events_onchange'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="onchange" size="20" value="">
+						</td>
+					</tr>
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('textarea_events_onfocus'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="onfocus" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('textarea_events_onblur'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="onblur" size="20" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('class_id'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('htmlclass'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="htmlclass" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('htmlid'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="htmlid" size="20" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+</table>
+<br>
+<div align="center">
+<script>document.write('<input type="submit" value="' + Text('ok') + '">');</script>
+<script>document.write('<input type="button" value="' + Text('cancel') + '" onClick="window.close()">');</script>
+</div>
+</form>
+</body>
+</html>

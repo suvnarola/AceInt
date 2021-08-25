@@ -1,0 +1,162 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" href="../dtree.css" type="text/css" />
+<script type="text/javascript" src="../dtree.js"></script>
+<link rel="stylesheet" type="text/css" href="../hardcore.css"> 
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('medialist_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+var request = "" + window.location;
+editor = requestParameter("editor");
+request_title = requestParameter("title");
+request_category = requestParameter("category");
+
+function openit(title, href, mediaclass) {
+	if (! mediaclass) {
+		if (href.substring(href.length-4) == ".swf") {
+			mediaclass = "flash";
+		} else if (href.substring(href.length-6) == ".class") {
+			mediaclass = "applet";
+		} else {
+			mediaclass = "image";
+		}
+	}
+	if (href != "") {
+		parent.tag["href"] = href;
+		if (matches = href.match(/id=(\d+)\D*$/)) {
+			id = matches[1];
+		} else {
+			id = '';
+		}
+<% if ((upload_path != "") && (enable_upload == "yes")) { %>
+		if (document.getElementById) {
+			if (document.getElementById('create_file')) document.getElementById('create_file').href = 'mediauploader.aspx?id='+id+'&action=Create&category=' + escape(request_category) + '&title=' + escape(title) + '&editor=' + editor;
+			if (request_title != "") {
+				if (document.getElementById('update_file')) document.getElementById('update_file').href = 'mediauploader.aspx?id='+id+'&action=Update&category=' + escape(request_category) + '&title=' + escape(title) + '&editor=' + editor;
+				if (document.getElementById('delete_file')) document.getElementById('delete_file').href = 'mediauploader.aspx?id='+id+'&action=Delete&category=' + escape(request_category) + '&title=' + escape(title) + '&editor=' + editor + '&href='+escape(href);
+			}
+		} else {
+			if (document.all['create_file']) document.all['create_file'].href = 'mediauploader.aspx?id='+id+'&action=Create&category=' + escape(request_category) + '&title=' + escape(title) + '&editor=' + editor;
+			if (request_title != "") {
+				if (document.all['update_file']) document.all['update_file'].href = 'mediauploader.aspx?id='+id+'&action=Update&category=' + escape(request_category) + '&title=' + escape(title) + '&editor=' + editor;
+				if (document.all['delete_file']) document.all['delete_file'].href = 'mediauploader.aspx?id='+id+'&action=Delete&category=' + escape(request_category) + '&title=' + escape(title) + '&editor=' + editor + '&href='+escape(href);
+			}
+		}
+<% } %>
+	}
+	if (parent.mediapreview && parent.mediapreview.location) parent.mediapreview.location.href = 'mediapreview.aspx?editor=' + editor + '&title='+escape(title)+'&href='+escape(href)+'&mediaclass='+escape(mediaclass);
+	if (parent.mediainsert && parent.mediainsert.location) parent.mediainsert.location.href = 'mediainsert.aspx?editor=' + editor + '&action=server&title='+escape(title)+'&href='+escape(href)+'&mediaclass='+escape(mediaclass);
+}
+
+</script>
+</head>
+<body onLoad="parent.medialist_ready();">
+<div class="dtree">
+<% if ((upload_path != "") && (enable_upload == "yes")) { %>
+<script>
+	if (request_title != "") {
+		document.writeln('<a id="create_file" target="mediainsert" href="mediauploader.aspx?action=Create&category=' + escape(request_category) + '&editor=' + editor + '"><img src="../dtree/page.gif">' + Text('medialist_create') + '</a>');
+		document.writeln('<a id="update_file" target="mediainsert" href="javascript:alert(\'' + Text('medialist_updateimage') + '\');"><img src="../dtree/page.gif">' + Text('medialist_update') + '</a>');
+		document.writeln('<a id="delete_file" target="mediainsert" href="javascript:alert(\'' + Text('medialist_deleteimage') + '\');"><img src="../dtree/trash.gif">' + Text('medialist_delete') + '</a>');
+	}
+</script>
+<% } else { %>
+<script>
+	if (request_title != "") {
+		document.writeln('<a id="create_file" target="mediainsert" href="javascript:alert(Text(\'disabled\'));"><img src="../dtree/page.gif">' + Text('medialist_create') + '</a>');
+		document.writeln('<a id="update_file" target="mediainsert" href="javascript:alert(Text(\'disabled\'));"><img src="../dtree/page.gif">' + Text('medialist_update') + '</a>');
+		document.writeln('<a id="delete_file" target="mediainsert" href="javascript:alert(Text(\'disabled\'));"><img src="../dtree/trash.gif">' + Text('medialist_delete') + '</a>');
+	} else {
+		document.writeln('&nbsp;');
+	}
+</script>
+<% } %>
+</div>
+<hr>
+<div class="dtree">
+	<script type="text/javascript">
+		<!--
+		menuitem = 0;
+		medialistMenu = new dTree('medialistMenu');
+		menuitem_images = menuitem;
+if (request_title != "") {
+		medialistMenu.add(menuitem++,-1,request_title,'','','',true,'imgfolder.gif');
+<% if (links != null) { %>
+		var myoptionkeys = new Array();
+		var myoptions = new Object();
+<%
+	foreach (FileInfo file in links) {
+		string entry = file.Name;
+		if (Regex.IsMatch(entry, allowed_files, RegexOptions.IgnoreCase)) {
+			string mediaclass = "";
+			if (entry.EndsWith(".swf")) {
+				mediaclass = "flash";
+			} else if (entry.EndsWith(".class")) {
+				mediaclass = "applet";
+			} else {
+				mediaclass = "image";
+			}
+			if (mediaclass != "") {
+%>
+		myoptionkeys[myoptionkeys.length] = '<%= entry %>';
+		myoptions['<%= entry %>'] = '<%= links_path + entry %>';
+<%
+			}
+		}
+	}
+%>
+	myoptionkeys.sort(function mysort(a,b) {
+		if (a.toLowerCase() < b.toLowerCase()) return -1;
+		if (a.toLowerCase() > b.toLowerCase()) return 1;
+		return 0;
+	});
+	for (myoption in myoptionkeys) {
+		if (myoptionkeys[myoption].substring(myoptionkeys[myoption].length-4) == ".swf") {
+			mediaclass = "flash";
+		} else if (myoptionkeys[myoption].substring(myoptionkeys[myoption].length-6) == ".class") {
+			mediaclass = "applet";
+		} else {
+			mediaclass = "image";
+		}
+		medialistMenu.add(menuitem++,menuitem_images,myoptionkeys[myoption],'javascript:openit(\'' + myoptionkeys[myoption] + '\',\'' + myoptions[myoptionkeys[myoption]] + '\',\'' + mediaclass + '\')','','',true,'');
+	}
+<% } else { %>
+
+if ((request_category == "website") || (request_category == "all")) {
+		medialistMenu.add(menuitem++,menuitem_images,'HardCore logo','javascript:openit(\'HardCore logo\',\'http://www.hardcoreinternet.co.uk/hardcore/logo.gif\',\'image\')','','',true,'');
+		medialistMenu.add(menuitem++,menuitem_images,'hyperlinkmanager','javascript:openit(\'hyperlinkmanager\',\'/hardcore/webeditor/hyperlinkmanager.jpg\',\'image\')','','',true,'');
+		medialistMenu.add(menuitem++,menuitem_images,'mediamanager','javascript:openit(\'mediamanager\',\'/hardcore/webeditor/mediamanager.jpg\',\'image\')','','',true,'');
+}
+
+<% } %>
+
+}
+		medialistMenu.draw();
+		if (parent.tag["href"]) medialistMenu.selectURLsubstring(parent.tag["href"]);
+		//-->
+	</script>
+</div>
+</body>
+</html>

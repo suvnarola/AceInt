@@ -1,0 +1,171 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" href="../dtree.css" type="text/css" />
+<script type="text/javascript" src="../dtree.js"></script>
+<link rel="stylesheet" type="text/css" href="../hardcore.css"> 
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('hyperlinklist_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+var request = "" + window.location;
+editor = requestParameter("editor");
+request_title = requestParameter("title");
+request_section = requestParameter("section");
+request_category = requestParameter("category");
+
+function openit(title, href) {
+	if (href != "") {
+		parent.tag["href"] = href;
+		if (matches = href.match(/id=(\d+)\D*$/)) {
+			id = matches[1];
+		} else if (matches = href.match(/add=(\d+)\D*$/)) {
+			id = matches[1];
+		} else {
+			id = '';
+		}
+<cfif ((upload_path is not "") and (enable_upload is "yes"))>
+		if ((request_section == "Pages") || (request_section == "Images") || (request_section == "Files") || (request_section == "Links") || (request_section == "Products")) {
+			if (document.getElementById) {
+				if (document.getElementById('create_file')) document.getElementById('create_file').href = 'hyperlinkuploader.cfm?id='+id+'&action=Create&section=' + escape(request_section) + '&category=' + escape(request_category) + '&title=' + escape(title) + '&editor=' + editor;
+			} else if (document.all) {
+				if (document.all['create_file']) document.all['create_file'].href = 'hyperlinkuploader.cfm?id='+id+'&action=Create&section=' + escape(request_section) + '&category=' + escape(request_category) + '&title=' + escape(title) + '&editor=' + editor;
+			}
+		}
+		if ((request_section == "Pages") || (request_section == "Images") || (request_section == "Files") || (request_section == "Links") || (request_section == "Products")) {
+			if (document.getElementById) {
+				if (document.getElementById('update_file')) document.getElementById('update_file').href = 'hyperlinkuploader.cfm?id='+id+'&action=Update&section=' + escape(request_section) + '&category=' + escape(request_category) + '&title=' + escape(title) + '&editor=' + editor;
+			} else if (document.all) {
+				if (document.all['update_file']) document.all['update_file'].href = 'hyperlinkuploader.cfm?id='+id+'&action=Update&section=' + escape(request_section) + '&category=' + escape(request_category) + '&title=' + escape(title) + '&editor=' + editor;
+			}
+		}
+		if ((request_section == "Pages") || (request_section == "Images") || (request_section == "Files") || (request_section == "Links") || (request_section == "Products")) {
+			if (document.getElementById) {
+				if (document.getElementById('delete_file')) document.getElementById('delete_file').href = 'hyperlinkuploader.cfm?id='+id+'&action=Delete&section=' + escape(request_section) + '&category=' + escape(request_category) + '&title=' + escape(title) + '&editor=' + editor + '&href='+escape(href);
+			} else if (document.all) {
+				if (document.all['delete_file']) document.all['delete_file'].href = 'hyperlinkuploader.cfm?id='+id+'&action=Delete&section=' + escape(request_section) + '&category=' + escape(request_category) + '&title=' + escape(title) + '&editor=' + editor + '&href='+escape(href);
+			}
+		}
+</cfif>
+		if (parent.hyperlinkpreview && parent.hyperlinkpreview.location) parent.hyperlinkpreview.location.href = 'hyperlinkpreview.cfm?editor=' + editor + '&title=' + escape(title) + '&href='+escape(href);
+		if (parent.hyperlinkinsert && parent.hyperlinkinsert.location) parent.hyperlinkinsert.location.href = 'hyperlinkinsert.cfm?editor=' + editor + '&title=' + escape(title) + '&href='+escape(href);
+	}
+}
+
+</script>
+</head>
+<body onLoad="parent.hyperlinklist_ready();">
+<div class="dtree">
+<cfif ((upload_path is not "") and (enable_upload is "yes"))>
+<script>
+	if ((request_title != "") && ((request_section == "Pages") || (request_section == "Images") || (request_section == "Files") || (request_section == "Links") || (request_section == "Products"))) {
+		document.writeln('<a id="create_file" target="hyperlinkinsert" href="hyperlinkuploader.cfm?action=Create&section=' + request_section + '&category=' + escape(request_category) + '&editor=' + editor + '"><img src="../dtree/page.gif">' + Text('hyperlinklist_create') + '</a>');
+		if ((request_section == "Pages") || (request_section == "Images") || (request_section == "Files") || (request_section == "Links")) {
+			document.writeln('<a id="update_file" target="hyperlinkinsert" href="javascript:alert(\'' + Text('hyperlinklist_updateitem') + '\');"><img src="../dtree/page.gif">' + Text('hyperlinklist_update') + '</a>');
+		}
+		document.writeln('<a id="delete_file" target="hyperlinkinsert" href="javascript:alert(\'' + Text('hyperlinklist_deleteitem') + '\');"><img src="../dtree/trash.gif">' + Text('hyperlinklist_delete') + '</a>');
+	} else {
+		document.writeln('&nbsp;');
+	}
+</script>
+<cfelse>
+<script>
+	if ((request_title != "") && ((request_section == "Pages") || (request_section == "Images") || (request_section == "Files") || (request_section == "Links") || (request_section == "Products"))) {
+		document.writeln('<a id="create_file" target="hyperlinkinsert" href="javascript:alert(Text(\'disabled\'));"><img src="../dtree/page.gif">' + Text('hyperlinklist_create') + '</a>');
+		if ((request_section == "Pages") || (request_section == "Images") || (request_section == "Files") || (request_section == "Links")) {
+			document.writeln('<a id="update_file" target="hyperlinkinsert" href="javascript:alert(Text(\'disabled\'));"><img src="../dtree/page.gif">' + Text('hyperlinklist_update') + '</a>');
+		}
+		document.writeln('<a id="delete_file" target="hyperlinkinsert" href="javascript:alert(Text(\'disabled\'));"><img src="../dtree/trash.gif">' + Text('hyperlinklist_delete') + '</a>');
+	} else {
+		document.writeln('&nbsp;');
+	}
+</script>
+</cfif>
+</div>
+<hr>
+<div class="dtree">
+	<script type="text/javascript">
+		<!--
+		menuitem = 0;
+		hyperlinklistMenu = new dTree('hyperlinklistMenu');
+		menuitem_links = menuitem;
+if ((request_section != "") && (request_title != "")) {
+		hyperlinklistMenu.add(menuitem++,-1,request_title,'','','',true,'imgfolder.gif');
+<cfif links is not "">
+		var myoptionkeys = new Array();
+		var myoptions = new Object();
+	<cfdirectory action="list" directory="#links#" name="entry" sort="name ASC">
+	<cfloop query="entry">
+		<cfif REFindNoCase(allowed_files, entry.Name) GT 0>
+		myoptionkeys[myoptionkeys.length] = '<cfoutput>#entry.Name#</cfoutput>';
+		myoptions['<cfoutput>#entry.Name#</cfoutput>'] = '<cfoutput>#links_path & entry.Name#</cfoutput>';
+		</cfif>
+	</cfloop>
+	myoptionkeys.sort(function mysort(a,b) {
+		if (a.toLowerCase() < b.toLowerCase()) return -1;
+		if (a.toLowerCase() > b.toLowerCase()) return 1;
+		return 0;
+	});
+	for (myoption in myoptionkeys) {
+		if (myoptionkeys[myoption].substring(myoptionkeys[myoption].length-4) == ".swf") {
+			mediaclass = "flash";
+		} else if (myoptionkeys[myoption].substring(myoptionkeys[myoption].length-6) == ".class") {
+			mediaclass = "applet";
+		} else {
+			mediaclass = "image";
+		}
+		hyperlinklistMenu.add(menuitem++,menuitem_links,myoptionkeys[myoption],'javascript:openit(\'' + myoptionkeys[myoption] + '\',\'' + myoptions[myoptionkeys[myoption]] + '\')','','',true,'');
+	}
+<cfelse>
+
+if (request_section == "Pages") {
+		hyperlinklistMenu.add(menuitem++,menuitem_links,'HardCore WCE example','javascript:openit(\'HardCore WCE example\',\'index.cfm\')','','',true,'');
+		hyperlinklistMenu.add(menuitem++,menuitem_links,'HardCore WCE MSIE v4.0+ example','javascript:openit(\'HardCore WCE MSIE v4.0+ example\',\'index1.cfm\')','','',true,'');
+		hyperlinklistMenu.add(menuitem++,menuitem_links,'HardCore WCE MSIE v5.5+/Mozilla example','javascript:openit(\'HardCore WCE MSIE v5.5+/Mozilla example\',\'index2.cfm\')','','',true,'');
+}
+
+if (request_section == "Images") {
+		hyperlinklistMenu.add(menuitem++,menuitem_links,'HardCore logo','javascript:openit(\'HardCore logo\',\'http://www.hardcoreinternet.co.uk/hardcore/logo.gif\')','','',true,'');
+		hyperlinklistMenu.add(menuitem++,menuitem_links,'hyperlinkmanager','javascript:openit(\'hyperlinkmanager\',\'hyperlinkmanager.jpg\')','','',true,'');
+		hyperlinklistMenu.add(menuitem++,menuitem_links,'mediamanager','javascript:openit(\'mediamanager\',\'mediamanager.jpg\')','','',true,'');
+}
+
+if (request_section == "Files") {
+		hyperlinklistMenu.add(menuitem++,menuitem_links,'User & Deleveloper Guide','javascript:openit(\'User & Deleveloper Guide\',\'UserDeveloperGuide.pdf\')','','',true,'');
+}
+
+if (request_section == "Links") {
+		hyperlinklistMenu.add(menuitem++,menuitem_links,'HardCore Internet','javascript:openit(\'HardCore Internet\',\'http://www.hardcoreinternet.co.uk\')','','',true,'');
+		hyperlinklistMenu.add(menuitem++,menuitem_links,'Web Content Management','javascript:openit(\'Web Content Management\',\'http://wcm.hardcoreinternet.co.uk\')','','',true,'');
+		hyperlinklistMenu.add(menuitem++,menuitem_links,'Web Content Editor','javascript:openit(\'Web Content Editor\',\'http://editor.hardcoreinternet.co.uk\')','','',true,'');
+}
+</cfif>
+
+}
+		hyperlinklistMenu.draw();
+		if (parent.tag["href"]) hyperlinklistMenu.selectURLsubstring(parent.tag["href"]);
+		//-->
+	</script>
+</div>
+</body>
+</html>

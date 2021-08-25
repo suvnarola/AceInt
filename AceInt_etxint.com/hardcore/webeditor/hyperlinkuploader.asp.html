@@ -1,0 +1,256 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" href="../dtree.css" type="text/css" />
+<script type="text/javascript" src="../dtree.js"></script>
+<link rel="stylesheet" type="text/css" href="../hardcore.css"> 
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('hyperlinkuploader_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+var request = "" + window.location;
+editor = requestParameter("editor");
+request_action = requestParameter("action");
+request_section  = requestParameter("section");
+request_category = requestParameter("category");
+request_id = requestParameter("id");
+request_title = requestParameter("title");
+request_href = requestParameter("href");
+
+function checkExtension(file){
+	if (file == "") { return false; }
+
+	var file_extension = file;
+	file_extension = file_extension.split(".");
+	file_extension = file_extension[file_extension.length - 1];
+	file_extension = file_extension.toLowerCase();
+
+	valid_extensions = "";
+	<% If (valid_extensions <> "") Then %>
+	valid_extensions = "<%= valid_extensions %>";
+	<% ElseIf (Request.QueryString("section") = "Images") Then %>
+	valid_extensions = "gif,jpg,jpeg,png,swf,class";
+	<% ElseIf (Request.QueryString("section") = "Files") Then %>
+	valid_extensions = "txt,pdf,doc,zip";
+	<% End If %>
+	if (valid_extensions != "") {
+		valid_extension = valid_extensions.split(",");
+		for (i=0; i<valid_extension.length; i++) {
+			if ( file_extension == valid_extension[i]) return true;
+		}
+		alert(Text('hyperlinkuploader_error') + ' ' + valid_extensions);
+	} else {
+		alert(Text('disabled'));
+	}
+	return false;
+}
+
+function getname(id, file, title, href){
+	if (document.upload.title.value == "") {
+		var file_name = file;
+		file_name = file_name.split("/");
+		file_name = file_name[file_name.length - 1];
+		file_name = file_name.split("\\");
+		file_name = file_name[file_name.length - 1];
+		document.upload.title.value = file_name;
+		title = file_name;
+	}
+	var title_extension = document.upload.title.value;
+	title_extension = title_extension.split(".");
+	if (title_extension.length == 1) {
+		var file_extension = file;
+		file_extension = file_extension.split(".");
+		file_extension = file_extension[file_extension.length - 1];
+		file_extension = file_extension.toLowerCase();
+		if (file_extension != "") {
+			document.upload.title.value = document.upload.title.value + "." + file_extension;
+			title = document.upload.title.value;
+		}
+	}
+	if (href) {
+		parent.hyperlinkpreview.location.href = 'hyperlinkpreview.asp?editor=' + editor + '&title='+escape(title)+'&href='+escape(href);
+		return true;
+	} else if (checkExtension(file) && checkExtension(title)){
+		parent.hyperlinkpreview.location.href = 'hyperlinkpreview.asp?editor=' + editor + '&title='+escape(title)+'&href='+escape('file:///'+file);
+		return true;
+	} else if ((title != "") && (file == "") && checkExtension(title)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function doSubmit() {
+	if ((document.upload.file.type == "hidden") || (getname(document.upload.id.value, document.upload.file.value, document.upload.title.value, document.upload.url.value))) {
+		if (document.upload.attributes) {
+			document.upload.attributes.action.nodeValue = document.upload.attributes.action.nodeValue + '&list=' + escape(parent.hyperlinklist.location.href);
+		}
+		parent.hyperlinklist.hyperlinklistMenu.clearCookie();
+		parent.hyperlinklist.location.href = 'wait.html';
+		return true;
+	} else {
+		return false;
+	}
+}
+
+</script>
+</head>
+<body>
+
+<% If ((upload_path <> "") AND (enable_upload = "yes")) Then %>
+
+<script>
+document.writeln('<form action="hyperlinknotification.asp?editor=' + editor + '" method="POST" enctype="multipart/form-data" name="upload" onSubmit="return doSubmit();">');
+document.writeln('<input type="hidden" name="section" value="' + request_section + '">');
+document.writeln('<input type="hidden" name="category" value="' + request_category + '">');
+document.writeln('<input type="hidden" name="old_title" value="' + request_title + '">');
+document.writeln('<input type="hidden" name="action" value="' + request_action + '">');
+if (request_action != "Create") {
+	document.writeln('<input type="hidden" name="id" value="' + request_id + '">');
+}
+if (request_section == "Pages") {
+	document.writeln('<input type="hidden" name="contentclass" value="page">');
+} else if (request_section == "Images") {
+	document.writeln('<input type="hidden" name="contentclass" value="image">');
+} else if (request_section == "Files") {
+	document.writeln('<input type="hidden" name="contentclass" value="file">');
+} else if (request_section == "Links") {
+	document.writeln('<input type="hidden" name="contentclass" value="link">');
+} else if (request_section == "Products") {
+	document.writeln('<input type="hidden" name="contentclass" value="product">');
+}
+</script>
+
+<table width="100%" border="0" class="dtree">
+	<tr>
+<script>
+	if (request_action == "Create") {
+		if (request_section == "Pages") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_create_page') + '</th>');
+		} else if (request_section == "Images") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_create_image') + '</th>');
+		} else if (request_section == "Files") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_create_file') + '</th>');
+		} else if (request_section == "Links") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_create_link') + '</th>');
+		} else if (request_section == "Products") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_create_product') + '</th>');
+		}
+	} else if (request_action == "Update") {
+		if (request_section == "Pages") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_update_page') + '</th>');
+		} else if (request_section == "Images") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_update_image') + '</th>');
+		} else if (request_section == "Files") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_update_file') + '</th>');
+		} else if (request_section == "Links") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_update_link') + '</th>');
+		} else if (request_section == "Products") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_update_product') + '</th>');
+		}
+	} else if (request_action == "Delete") {
+		if (request_section == "Pages") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_delete_page') + '</th>');
+		} else if (request_section == "Images") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_delete_image') + '</th>');
+		} else if (request_section == "Files") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_delete_file') + '</th>');
+		} else if (request_section == "Links") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_delete_link') + '</th>');
+		} else if (request_section == "Products") {
+			document.writeln('<th colspan="2" align="left">' + Text('hyperlinkuploader_delete_product') + '</th>');
+		}
+	}
+</script>
+<script>
+		document.writeln('<th width="50%" align="right">');
+		if (request_action == "Delete") {
+			document.writeln('<input type="submit" name="delete" value="' + Text('hyperlinkuploader_delete') + '">');
+		} else if (request_action == "Update") {
+			document.writeln('<input type="submit" name="update" value="' + Text('hyperlinkuploader_update') + '">');
+		} else {
+			document.writeln('<input type="submit" name="create" value="' + Text('hyperlinkuploader_create') + '">');
+		}
+		document.writeln('</th>');
+</script>
+	</tr>
+	<tr>
+		<td align="left" colspan="2"><script>document.write(Text('hyperlinkuploader_heading'));</script></td>
+<script>
+		if (request_action == "Delete") {
+			document.writeln('<td width="50%" align="left">' + Text('hyperlinkuploader_file') + '</td>');
+		} else if ((request_section == "Images") || (request_section == "Files")) {
+			document.writeln('<td width="50%" align="left">' + Text('hyperlinkuploader_file') + '</td>');
+		} else if (request_section == "Links") {
+			document.writeln('<td width="50%" align="left">' + Text('hyperlinkuploader_address') + '</td>');
+		} else {
+			document.writeln('<td width="50%" align="left">&nbsp;</td>');
+		}
+</script>
+	</tr>
+	<tr align="left" valign="top">
+		<td colspan="2">
+<script>
+		if (request_action == "Delete") {
+			document.writeln('<input disabled type="text" name="title" size="40" maxlength="250" value="' + request_title + '">');
+		} else {
+			document.writeln('<input type="text" name="title" size="40" maxlength="250" value="' + request_title + '">');
+		}
+</script>
+		</td>
+		<td width="50%">
+<script>
+		if (request_action == "Delete") {
+			document.writeln('<input type="hidden" name="file" value="">');
+			document.writeln('<input disabled type="text" name="url" size="40" maxlength="250" value="' + request_href + '">');
+		} else if ((request_section == "Pages") || (request_section == "Images") || (request_section == "Files")) {
+			document.writeln('<input type="file" name="file" size="20" maxlength="256" align="middle">');
+			document.writeln('<input type="hidden" name="url" value="">');
+		} else if (request_section == "Links") {
+			document.writeln('<input type="hidden" name="file" value="">');
+			document.writeln('<input type="text" name="url" size="40" maxlength="250" value="' + request_href + '">');
+		} else {
+			document.writeln('<input type="hidden" name="file" value="">');
+			document.writeln('<input type="hidden" name="url" value="">');
+		}
+</script>
+		</td>
+	</tr>
+</table>
+
+</form>
+
+<% Else %>
+
+<table width="100%" height="100%" border="0">
+	<tr>
+		<td align="center" valign="middle">
+			<script>document.write(Text('hyperlinkuploader_disabled'));</script>
+		</td>
+	</tr>
+</table>
+
+<% End If %>
+
+</body>
+</html>

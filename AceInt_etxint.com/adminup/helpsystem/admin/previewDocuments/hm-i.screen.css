@@ -1,0 +1,122 @@
+/* #### GENERIC TAGS ######################################################## */
+body {
+	font-family: Verdana, Geneva, Arial, helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	background-color: #FFFFFF;
+	text-align: center;
+}
+td, th {
+}
+h1 {
+	font-size: 20px;
+	font-weight: normal;
+	color: #032869;
+}
+h2 {
+	font-size: 18px;
+}
+h3 {
+	font-size: 14px;
+}
+h4 {
+	font-size: 12px;
+}
+h5 {
+	font-size: 10px;
+}
+
+/* #### GENERIC LINK STYLES ################################################# */
+a:link, a:visited, a:active {
+	color: #032869;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+/* #### GENERIC STYLES ###################################################### */
+div.content {
+	border: 1px solid #996633;
+	width: 558px;
+	text-align: left;
+}
+
+div.doc-footer {
+	background-color: #F0E9E1;
+	height: 40px;
+	margin-top: 10px;
+	position: relative;
+}
+	.doc-footer .date {
+	    font-size: 10px;
+	    font-weight: bold;
+	    float: right;
+	    right: 3px;
+	    bottom: 3px;
+	    position: absolute;
+	    color: #996633;
+	}
+
+div.subComponents {
+	margin-left: 5px;
+}
+
+	div.subComponents .subComponents {
+		margin-left: 25px;
+	}
+
+	div.subComponents .subComponents h3 {
+		font-size: 12px;
+	}
+
+/* #### SPECIFIC STYLES ##################################################### */
+h1.doc-title {
+	width: 558px;
+	height: 70px;
+	border-bottom: 1px solid #CCB399;
+	background-image: url(hm-header-i.jpg);
+	background-position: top;
+	background-repeat: no-repeat;
+	text-align: right;
+	vertical-align: bottom;
+	margin: 0px 0px 20px 0px;
+	position: relative;
+}
+
+a.back-to-top {
+	font-weight: bold;
+	text-decoration: none;
+	margin: 0px 0px 0px 5px;
+}
+
+a.print {
+	font-weight: bold;
+	display: block;
+	position: reletive;
+	float: right;
+	top: 0px;
+	font-size: 10px;
+	padding-right: 3px;
+	margin-top: -20px;
+}
+
+/* #### COMPLEX SPECIFIC STYLES ############################################# */
+h1.doc-title span {
+	display: block;
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+}
+
+/* #### TABLE OF CONTENTS ################################################### */
+ol.toc {
+    list-style-type: decimal;
+	margin-left: 40px;
+}
+ol.toc ol {
+    list-style-type: lower-alpha;
+	font-size: 10px;
+	margin-left: 20px;
+	text-indent: 0px;
+}

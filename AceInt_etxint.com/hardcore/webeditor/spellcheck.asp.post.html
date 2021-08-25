@@ -1,0 +1,222 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('spellcheck_title');
+
+window.focus();
+
+var id = '<%= Request.Form("id") %>';
+var originalContent = '<%= Replace(Replace(Replace(content,"'","\'"),vbCR,"\r"),vbLF,"\n") %>';
+
+</script>
+<script>
+	var misspelled = new Array;
+	<%= jsMisspelled %>
+	var misspelledCount = misspelled.length;
+	var misspelledIndex = 0;
+	var charOffset = 0;
+	var content = "";
+	var highlightStart = '<span id="spellcheck" style="background-color: red; color: white;">';
+	var highlightEnd = '</span>';
+
+	function misspelledItem(offset,text,suggestions) {
+		this.offset = offset
+		this.original = text;
+		this.text = text;
+		this.suggestions = suggestions;
+	}
+
+	function initform() {
+		document.getElementById("misspelledCount").innerHTML = misspelledCount;
+		content = originalContent;
+		if (misspelledCount >0) {
+			showMisspelling();
+		}
+	}
+
+	function showMisspelling() {
+		var i,opt,temp;
+		var suggestions = misspelled[misspelledIndex].suggestions.split(",");
+		document.getElementById("misspelledIndex").innerHTML = misspelledIndex+1;
+		document.spellcheckform.original.value = misspelled[misspelledIndex].original;
+		if (misspelled[misspelledIndex].original != misspelled[misspelledIndex].text) {
+			document.spellcheckform.replace.value = misspelled[misspelledIndex].text;
+		} else {
+			document.spellcheckform.replace.value = suggestions[0];
+		}
+		document.spellcheckform.suggestions.length = 0;
+		for (var suggestion in suggestions) {
+			document.spellcheckform.suggestions.options[document.spellcheckform.suggestions.length] = new Option(suggestions[suggestion],suggestions[suggestion]);
+		}
+		highlightMisspelledText();
+		window.focus();
+	}
+
+	function selectSuggestion() {
+		document.spellcheckform.replace.value = document.spellcheckform.suggestions.value;
+	}
+
+	function highlightMisspelledText() {
+		var text = misspelled[misspelledIndex].text;
+		content = content.substring(0, misspelled[misspelledIndex].offset) + highlightStart + text + highlightEnd + content.substring(misspelled[misspelledIndex].offset + text.length, content.length);
+		window.opener.contenteditable_setContent(content, id);
+		if (window.opener.contenteditable_iframe(id).contentWindow.document.getElementById('spellcheck')) {
+			window.opener.contenteditable_iframe(id).contentWindow.document.getElementById('spellcheck').scrollIntoView();
+			document.getElementById("misspelledHidden").innerHTML = '';
+		} else {
+			unhighlightMisspelledText();
+			document.getElementById("misspelledHidden").innerHTML = highlightStart + Text('spellcheck_hidden') + highlightEnd;
+		}
+	}
+
+	function unhighlightMisspelledText() {
+		if (misspelled[misspelledIndex]) {
+			var text = misspelled[misspelledIndex].text;
+			if (text != content.substring(misspelled[misspelledIndex].offset, misspelled[misspelledIndex].offset + text.length)) {
+				content = content.substring(0, misspelled[misspelledIndex].offset) + text + content.substring(misspelled[misspelledIndex].offset + text.length + highlightStart.length + highlightEnd.length, content.length);
+			}
+			window.opener.contenteditable_setContent(content, id);
+		}
+	}
+
+	function nextMisspelling() {
+		if (misspelledIndex < misspelledCount-1) {
+			unhighlightMisspelledText();
+			misspelledIndex++;
+			showMisspelling();
+		}	
+	}
+
+	function previousMisspelling() {
+		if (misspelledIndex > 0) {
+			unhighlightMisspelledText();
+			misspelledIndex--;
+			showMisspelling();
+		}	
+	}
+
+	function replaceMisspelledText() {
+		if (misspelled[misspelledIndex]) {
+			var text = misspelled[misspelledIndex].text;
+			var replace = document.spellcheckform.replace.value;
+			if (text && replace) {
+				unhighlightMisspelledText();
+
+				content = content.substring(0, misspelled[misspelledIndex].offset) + replace + content.substring(misspelled[misspelledIndex].offset + text.length, content.length);
+				window.opener.contenteditable_setContent(content, id);
+	
+				misspelled[misspelledIndex].text = replace;
+				for (var i=misspelledIndex+1; i<misspelledCount; i++) {
+					misspelled[i].offset += (replace.length - text.length);
+				}
+
+				if (misspelledIndex < misspelledCount-1) {
+					misspelledIndex++;
+					showMisspelling();
+				}
+			}
+		}
+	}
+
+	function ignoreMisspelledText() {
+		if (misspelled[misspelledIndex]) {
+			unhighlightMisspelledText();
+
+			if (misspelledIndex < misspelledCount-1) {
+				misspelledIndex++;
+				showMisspelling();
+			}
+		}
+	}
+
+	function ok() {
+		unhighlightMisspelledText();
+		window.close();
+	}
+
+	function cancel() {
+		window.opener.contenteditable_setContent(originalContent, id);
+		window.close();
+	}
+</script>
+</head>
+<body onload="initform();">
+<form name="spellcheckform">
+<table width="100%" border="0" class="dtree">
+	<tr>
+		<td colspan="2" class="webeditor_window_title">
+			<script>document.write(Text('spellcheck_title'))</script>
+		</td>
+		<td align="right" colspan="2">
+			<script>document.write('<input type="button" value="' + Text('spellcheck_previous') + '" onclick="previousMisspelling();">');</script>
+			<script>document.write('<input type="button" value="' + Text('spellcheck_next') + '" onclick="nextMisspelling();">');</script>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend align="right" class="webeditor_window_heading"><b><script>document.write(Text('spellcheck_misspelling'));</script></b> <span id="misspelledIndex">0</span> / <span id="misspelledCount">0</span></legend>
+				<table width="100%">
+					<tr>
+						<td>
+							<b><script>document.write(Text('spellcheck_original'))</script> <span id="misspelledHidden"></span></b>
+						</td>
+						<td align="center" valign="bottom" rowspan="2">
+							<script>document.write('<input type="button" value="' + Text('spellcheck_ignore') + '" onclick="ignoreMisspelledText();">');</script>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top">
+							<input type="text" name="original" value="" style="width: 150px;" readonly>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b><script>document.write(Text('spellcheck_suggestion'))</script></b>
+						</td>
+						<td align="center" valign="bottom" rowspan="2">
+							<script>document.write('<input type="button" value="' + Text('spellcheck_replace') + '" onclick="replaceMisspelledText();">');</script>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top">
+							<input type="text" name="replace" value="" style="width: 150px;">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b><script>document.write(Text('spellcheck_suggestions'))</script></b>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top">
+							<select name="suggestions" id="suggestions" size="5" onchange="selectSuggestion();" style="width: 150px;"></select>
+						</td>
+						<td align="center" valign="middle">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="4">
+			<script>document.write('<input type="button" value="' + Text('spellcheck_ok') + '" onclick="ok();">');</script>
+			<script>document.write('<input type="button" value="' + Text('spellcheck_cancel') + '" onclick="cancel();">');</script>
+		</td>
+	</tr>
+</table>
+
+
+
+</form>
+</body>
+</html>

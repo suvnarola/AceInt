@@ -1,0 +1,237 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('tableproperties_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+window.focus();
+var request = "" + window.location;
+editor = requestParameter("editor");
+
+function initform() {
+	document.forms[0].width.value = requestParameter("width");
+	document.forms[0].height.value = requestParameter("height");
+	document.forms[0].cellpadding.value = requestParameter("cellpadding");
+	document.forms[0].cellspacing.value = requestParameter("cellspacing");
+	document.forms[0].bgcolor.value = requestParameter("bgcolor");
+	document.forms[0].bordercolor.value = requestParameter("bordercolor");
+	document.forms[0].border.value = requestParameter("border");
+	document.forms[0].background.value = requestParameter("background");
+	document.forms[0].background.options[0].text = requestParameter("background");
+	document.forms[0].background.options[0].value = requestParameter("background");
+	document.forms[0].htmlclass.value = requestParameter("htmlclass");
+	document.forms[0].htmlid.value = requestParameter("htmlid");
+	if (document.getElementById && document.getElementById("bgcolor_preview")) document.getElementById("bgcolor_preview").style.backgroundColor = document.forms[0].bgcolor.value;
+	if (document.getElementById && document.getElementById("bordercolor_preview")) document.getElementById("bordercolor_preview").style.backgroundColor = document.forms[0].bordercolor.value;
+}
+
+function updatetable(form) {
+	window.opener[editor].updateTable(form);
+	window.close();
+}
+
+function selectcolor(attribute) {
+	if (document.getElementById) {
+		window.open('colour.html?editor=table&attribute='+attribute, 'colour_window', ',width=400,height=325,scrollbars=yes,resizable=yes,status=yes', true);
+	}
+}
+
+</script>
+<script>
+
+var table = new Object();
+
+</script>
+<script language="Javascript1.4">
+
+if (! table.bgcolor) {
+	table.bgcolor = function (color) {
+		try {
+			document.forms[0].bgcolor.value = color;
+			if (document.getElementById("bgcolor_preview")) document.getElementById("bgcolor_preview").style.backgroundColor = color;
+		} catch(e) {
+		}
+	}
+}
+
+if (! table.bordercolor) {
+	table.bordercolor = function (color) {
+		try {
+			document.forms[0].bordercolor.value = color;
+			if (document.getElementById("bordercolor_preview")) document.getElementById("bordercolor_preview").style.backgroundColor = color;
+		} catch(e) {
+		}
+	}
+}
+
+</script>
+<!--[if GTE IE 5]>
+<script Language="Javascript">
+
+if (! table.bgcolor) {
+	table.bgcolor = function (color) {
+		try {
+			document.forms[0].bgcolor.value = color;
+			if (document.getElementById("bgcolor_preview")) document.getElementById("bgcolor_preview").style.backgroundColor = color;
+		} catch(e) {
+		}
+	}
+}
+
+if (! table.bordercolor) {
+	table.bordercolor = function (color) {
+		try {
+			document.forms[0].bordercolor.value = color;
+			if (document.getElementById("bordercolor_preview")) document.getElementById("bordercolor_preview").style.backgroundColor = color;
+		} catch(e) {
+		}
+	}
+}
+
+</script>
+<![endif]-->
+<script>
+
+if (! table.bgcolor) {
+	table.bgcolor = function (color) {
+		document.forms[0].bgcolor.value = color;
+	}
+}
+
+if (! table.bordercolor) {
+	table.bordercolor = function (color) {
+		document.forms[0].bordercolor.value = color;
+	}
+}
+
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="initform();">
+<form onSubmit="javascript:updatetable(this); return false;">
+<table width="100%" border="0" class="dtree">
+	<tr align="left" valign="top"> 
+		<td colspan="4" class="webeditor_window_title"><script>document.write(Text('tableproperties_title'));</script></td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4" width="100%">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('tableproperties_size'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('tableproperties_size_width'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="width" size="5" value="">
+						</td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('tableproperties_size_padding'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="cellpadding" size="5" value="">
+						</td>
+					</tr>
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('tableproperties_size_height'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="height" size="5" value="">
+						</td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('tableproperties_size_spacing'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="cellspacing" size="5" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="2" width="50%">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('tableproperties_border'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('tableproperties_border_color'));</script></td>
+						<td class="webeditor_window_value"> 
+							<nobr><input type="text" name="bordercolor" size="8" value="" onChange="javascript:table.bordercolor(this.value);"><a target="_blank" onClick="javascript:selectcolor('bordercolor');"><img id="bordercolor_preview" style="border: 1px outset; background-color: white; width: 21px; height: 20px; vertical-align: top" src="spacer.gif"><img style="border: 1px outset; background-color: #C0C0C0; vertical-align: top" src="backcolor.gif" width="21" height="20"></a></nobr>
+						</td>
+					</tr>
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('tableproperties_border_width'));</script></td>
+						<td class="webeditor_window_value">
+							<input type="text" name="border" size="5" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+		<td colspan="2" width="50%">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('tableproperties_background'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('tableproperties_background_color'));</script></td>
+						<td class="webeditor_window_value"> 
+							<nobr><input type="text" name="bgcolor" size="8" value="" onChange="javascript:table.bgcolor(this.value);"><a target="_blank" onClick="javascript:selectcolor('bgcolor');"><img id="bgcolor_preview" style="border: 1px outset; background-color: white; width: 21px; height: 20px; vertical-align: top" src="spacer.gif"><img style="border: 1px outset; background-color: #C0C0C0; vertical-align: top" src="backcolor.gif" width="21" height="20"></a></nobr>
+						</td>
+					</tr>
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('tableproperties_background_image'));</script></td>
+						<td class="webeditor_window_value">
+							<select name="background" style="width: 145px;">
+							<option value=" ">
+							<option value=""><script>document.write(Text('tableproperties_background_image_none'));</script>
+							<option value="http://www.hardcoreinternet.co.uk/hardcore/logo.gif">HardCore Internet logo
+							</select>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('class_id'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('htmlclass'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="htmlclass" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('htmlid'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="htmlid" size="20" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+</table>
+<br>
+<div align="center">
+<script>document.write('<input type="submit" value="' + Text('ok') + '">');</script>
+<script>document.write('<input type="button" value="' + Text('cancel') + '" onClick="window.close()">');</script>
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,6 @@
+#matches-container { position: relative; display: inline; }
+#matches { display: none; position: absolute; top: 7px; left: 0px; width: 300px; border: 1px solid #999999; background: #EEEEEE; color: #666666; font-size: 11px; padding: 3px; }
+#matches .match { font-weight: bold; color: #000000; }
+#matches ul { list-style: none; padding: 0px; margin: 0px; overflow: hidden; white-space: nowrap; }
+.match-hover { background: #DFDFDF; cursor: pointer; }
+.match-highlight { background: #DFDFDF; }

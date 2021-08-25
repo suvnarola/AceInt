@@ -1,0 +1,65 @@
+
+
+<div class="searchBox">
+  <span class="searchContainer"><input data-bind="value: query, valueUpdate: 'afterkeyup', event: { keyup: doSearch }" />
+<button data-bind="click: doSearch"></button></span>
+<ul class="results" data-bind='template: { name: "resultItem", foreach: results }, visible: results().length > 0'></ul>
+</div>
+
+<script type="text/html" id="resultItem">
+  <li class="${ type() }">
+    {{if type() == "header"}}
+      <span data-bind="text: text"></span>
+    {{else}}
+      <a href="#">
+        <img src="${ imageUrl() }" />
+        <span class="text" data-bind="text: name"></span>
+      </a>
+    {{/if}}
+  </li>
+</script>
+<script type="text/javascript">
+
+(function($)
+{
+  var baseModel =
+  {
+    query: "",
+    results: []
+  };
+
+  var viewModel = ko.mapping.fromJS(baseModel);
+  viewModel.doSearch = function()
+  {
+    var $this = this;
+    setTimeout(function()
+    {
+      var resultModel = null;
+      var q = $this.query();
+      if (q == "")
+      {
+        resultModel = { results: [] };
+        ko.mapping.updateFromJS(viewModel, resultModel);
+      }
+      else
+      {
+        $.ajax({
+          url: "json.asp",
+          data: { "query": q },
+          type: "GET",
+          dataType: "json",
+          success: function(r)
+          {
+            resultModel = r;
+            ko.mapping.updateFromJS(viewModel, resultModel);
+          }
+        });
+      }
+    }, 1);
+
+    return true;
+  };
+
+  ko.applyBindings(viewModel, $("#search").get(0));
+})(jQuery);
+    </script>

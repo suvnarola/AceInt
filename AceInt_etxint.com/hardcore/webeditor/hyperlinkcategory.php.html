@@ -1,0 +1,115 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" href="../dtree.css" type="text/css" />
+<script type="text/javascript" src="../dtree.js"></script>
+<link rel="stylesheet" type="text/css" href="../hardcore.css"> 
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+error = '<?php echo $error ?>';
+if (error == 'DISABLED') error = Text('disabled');
+
+document.title = Text('hyperlinkcategory_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+var request = "" + window.location;
+editor = requestParameter("editor");
+request_action = requestParameter("action");
+request_section = requestParameter("section");
+request_category = requestParameter("category");
+request_title = requestParameter("title");
+request_old_title = requestParameter("old_title");
+request_submit = requestParameter("submit");
+
+</script>
+</head>
+<body>
+
+<form action="hyperlinkcategory.php" method="GET">
+<script>
+document.writeln('<input type="hidden" name="editor" value="' + editor + '">');
+document.writeln('<input type="hidden" name="action" value="' + request_action + '">');
+document.writeln('<input type="hidden" name="section" value="' + request_section + '">');
+document.writeln('<input type="hidden" name="category" value="' + request_category + '">');
+document.writeln('<input type="hidden" name="old_title" value="' + request_title + '">');
+</script>
+
+<table width="100%" border="0" class="dtree">
+	<tr>
+<script>
+if (request_action == "Create") {
+	document.writeln('<th align="left">' + Text('hyperlinkcategory_create') + '</th>');
+	document.writeln('<th align="left"><input type="submit" name="submit" value="' + Text('hyperlinkcategory_create_submit') + '"></th>');
+	document.writeln('<th width="66%">&nbsp;</th>');
+} else if (request_action == "Update") {
+	document.writeln('<th align="left">' + Text('hyperlinkcategory_update') + '</th>');
+	document.writeln('<th align="left"><input type="submit" name="submit" value="' + Text('hyperlinkcategory_update_submit') + '"></th>');
+	document.writeln('<th width="66%">&nbsp;</th>');
+} else if (request_action == "Delete") {
+	document.writeln('<th align="left">' + Text('hyperlinkcategory_delete') + '</th>');
+	document.writeln('<th align="left"><input type="submit" name="submit" value="' + Text('hyperlinkcategory_delete_submit') + '"></th>');
+	document.writeln('<th width="66%">&nbsp;</th>');
+}
+</script>
+	</tr>
+	<tr><td colspan="3">&nbsp;</td></tr>
+	<tr>
+		<td align="left" colspan="2"><script>document.write(Text('hyperlinkcategory_category'));</script></td>
+		<td width="66%">&nbsp;</td>
+	</tr>
+	<tr align="left" valign="top">
+		<td colspan="2">
+<script>
+		if (request_action == "Delete") {
+			document.writeln('<input disabled type="text" name="title" size="40" maxlength="250" value="' + request_title + '">');
+		} else {
+			document.writeln('<input type="text" name="title" size="40" maxlength="250" value="' + request_title + '">');
+		}
+</script>
+		</td>
+		<td width="66%">&nbsp;</td>
+	</tr>
+</table>
+<script>
+	if (request_submit != "") {
+		if (error) alert(error);
+		if (request_action == "Delete") {
+			parent.ready_section = request_section;
+			parent.ready_category = '<?php echo $category ?>';
+			parent.ready_title = '<?php echo $title ?>';
+			parent.hyperlinklistfilter.hyperlinklistfilterMenu.clearCookie();
+			parent.hyperlinklistfilter.document.location.reload(true);
+			document.location.href = 'hyperlinkinsert.php?editor=' + editor;
+		} else {
+			parent.ready_section = request_section;
+			parent.ready_category = '<?php echo $category ?>';
+			parent.ready_title = '<?php echo $title ?>';
+			parent.hyperlinklistfilter.document.location.reload(true);
+			document.location.href = 'hyperlinkinsert.php?editor=' + editor;
+		}
+	}
+</script>
+
+</form>
+
+</body>
+</html>

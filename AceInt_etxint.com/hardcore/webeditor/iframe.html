@@ -1,0 +1,150 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('iframe_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+window.focus();
+var request = "" + window.location;
+editor = requestParameter("editor");
+
+function initform() {
+	document.forms[0].width.value = unescape(request.match(new RegExp("^.*\?.*[?&]width=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]width=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].height.value = unescape(request.match(new RegExp("^.*\?.*[?&]height=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]height=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].src.value = unescape(request.match(new RegExp("^.*\?.*[?&]src=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]src=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].htmlclass.value = unescape(request.match(new RegExp("^.*\?.*[?&]htmlclass=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]htmlclass=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].htmlid.value = unescape(request.match(new RegExp("^.*\?.*[?&]htmlid=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]htmlid=([^&]+).*$", "i"), "$1") : "");
+
+	var src = document.forms[0].src.value;
+	if ('http://'+document.location.hostname == src.substring(0,7+document.location.hostname.length)) {
+		src = src.substring(7+document.location.hostname.length);
+	} else {
+		for (j=0; j<=document.forms[0].type.length; j++) {
+			if (document.forms[0].type.options[j] && (document.forms[0].type.options[j].value == src.substring(0,document.forms[0].type.options[j].value.length))) {
+				document.forms[0].type.selectedIndex = j;
+			}
+		}
+		src = src.substring(document.forms[0].type.options[document.forms[0].type.selectedIndex].value.length);
+	}
+	document.forms[0].link.value = src;
+}
+
+function insertiframe(form) {
+	var width = form.width.value;
+	var height = form.height.value;
+	var src = form.src.value;
+	var htmlclass = form.htmlclass.value;
+	var htmlid = form.htmlid.value;
+	window.opener[editor].insertIframe(width,height,src,htmlclass,htmlid);
+	window.close();
+}
+
+function update_src(form) {
+	form.src.value = form.type.options[form.type.selectedIndex].value + form.link.value;
+}
+ 
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="initform();">
+<form onSubmit="javascript:insertiframe(this); return false;">
+<input type="hidden" name="src" value="">
+<table width="100%" border="0" class="dtree">
+	<tr align="left" valign="top"> 
+		<td colspan="4" class="webeditor_window_title"><script>document.write(Text('iframe_title'));</script></td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('iframe_size'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('iframe_size_width'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="width" size="5" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('iframe_size_height'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="height" size="5" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('iframe_url'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('iframe_url_type'));</script></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('iframe_url_address'));</script></td>
+					</tr>
+					<tr>
+						<td class="webeditor_window_value"> 
+							<select name="type" onChange="update_src(this.form);">
+								<option value="" selected>&nbsp;
+								<option value="http://">http://
+								<option value="https://">https://
+								<option value="ftp://">ftp://
+							</select>
+						</td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="link" size="53" onChange="update_src(this.form);">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('class_id'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('htmlclass'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="htmlclass" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('htmlid'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="htmlid" size="20" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+</table>
+<br>
+<div align="center">
+<script>document.write('<input type="submit" value="' + Text('ok') + '">');</script>
+<script>document.write('<input type="button" value="' + Text('cancel') + '" onClick="window.close()">');</script>
+</div>
+</form>
+</body>
+</html>

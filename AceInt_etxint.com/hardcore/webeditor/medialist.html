@@ -1,0 +1,106 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" href="../dtree.css" type="text/css" />
+<script type="text/javascript" src="../dtree.js"></script>
+<link rel="stylesheet" type="text/css" href="../hardcore.css"> 
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('medialist_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+var request = "" + window.location;
+editor = requestParameter("editor");
+request_title = requestParameter("title");
+request_category = requestParameter("category");
+
+function openit(title, href, mediaclass) {
+	if (! mediaclass) {
+		if (href.substring(href.length-4) == ".swf") {
+			mediaclass = "flash";
+		} else if (href.substring(href.length-6) == ".class") {
+			mediaclass = "applet";
+		} else {
+			mediaclass = "image";
+		}
+	}
+	if (href != "") {
+		parent.tag["href"] = href;
+		if (matches = href.match(/id=(\d+)\D*$/)) {
+			id = matches[1];
+		} else {
+			id = '';
+		}
+		if (document.getElementById) {
+			document.getElementById('create_file').href = 'mediauploader.html?id='+id+'&action=Create&' + request_category + '=' + escape(request_title) + '&editor=' + editor;
+			if (request_title != "") {
+				document.getElementById('update_file').href = 'mediauploader.html?id='+id+'&action=Update&title='+escape(title)+'&editor=' + editor;
+				document.getElementById('delete_file').href = 'mediauploader.html?id='+id+'&action=Delete&title='+escape(title)+'&href='+escape(href)+'&editor=' + editor;
+			}
+		} else {
+			document.all['create_file'].href = 'mediauploader.html?id='+id+'&action=Create&' + request_category + '=' + escape(request_title) + '&editor=' + editor;
+			if (request_title != "") {
+				document.all['update_file'].href = 'mediauploader.html?id='+id+'&action=Update&title='+escape(title)+'&editor=' + editor;
+				document.all['delete_file'].href = 'mediauploader.html?id='+id+'&action=Delete&title='+escape(title)+'&href='+escape(href)+'&editor=' + editor;
+			}
+		}
+	}
+	parent.mediapreview.location.href = 'mediapreview.html?editor=' + editor + '&title='+escape(title)+'&href='+escape(href)+'&mediaclass='+escape(mediaclass);
+	parent.mediainsert.location.href = 'mediainsert.html?editor=' + editor + '&action=server&title='+escape(title)+'&href='+escape(href)+'&mediaclass='+escape(mediaclass);
+}
+
+</script>
+</head>
+<body onLoad="parent.medialist_ready();">
+<div class="dtree">
+<script>
+	document.writeln('<a id="create_file" target="mediainsert" href="mediauploader.html?action=Create&editor=' + editor + '"><img src="../dtree/page.gif">' + Text('medialist_create') + '</a>');
+	if (request_title != "") {
+		document.writeln('<a id="update_file" target="mediainsert" href="javascript:alert(\'' + Text('medialist_updateimage') + '\');"><img src="../dtree/page.gif">' + Text('medialist_update') + '</a>');
+		document.writeln('<a id="delete_file" target="mediainsert" href="javascript:alert(\'' + Text('medialist_deleteimage') + '\');"><img src="../dtree/trash.gif">' + Text('medialist_delete') + '</a>');
+	}
+</script>
+</div>
+<hr>
+<div class="dtree">
+	<script type="text/javascript">
+		<!--
+		menuitem = 0;
+		medialistMenu = new dTree('medialistMenu');
+		menuitem_images = menuitem;
+if ((request_category != "") && (request_title != "")) {
+		medialistMenu.add(menuitem++,-1,request_title,'','','',true,'imgfolder.gif');
+
+if ((request_category == "website") || (request_category == "all")) {
+		medialistMenu.add(menuitem++,menuitem_images,'HardCore logo','javascript:openit(\'HardCore logo\',\'http://www.hardcoreinternet.co.uk/hardcore/logo.gif\',\'image\')','','',true,'');
+		medialistMenu.add(menuitem++,menuitem_images,'hyperlinkmanager','javascript:openit(\'hyperlinkmanager\',\'/hardcore/webeditor/hyperlinkmanager.jpg\',\'image\')','','',true,'');
+		medialistMenu.add(menuitem++,menuitem_images,'mediamanager','javascript:openit(\'mediamanager\',\'/hardcore/webeditor/mediamanager.jpg\',\'image\')','','',true,'');
+}
+
+}
+		medialistMenu.draw();
+		if (parent.tag["href"]) medialistMenu.selectURLsubstring(parent.tag["href"]);
+		//-->
+	</script>
+</div>
+</body>
+</html>

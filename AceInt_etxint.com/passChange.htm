@@ -1,0 +1,84 @@
+ <html>
+
+ <head>
+ <meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+ <meta name="ProgId" content="FrontPage.Editor.Document">
+ <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ <title>Empire Trade Administration Login</title>
+ <style>
+ <!--
+ td           { font-family: Verdana; font-size: 8pt }
+ -->
+ </style>
+ </head>
+ <script type="text/javascript">
+  if (self != top){
+   if (document.images) top.location.replace(document.location.href);
+   else top.location.href = document.location.href;
+  }
+ </script>
+ <script language="javascript" type="text/javascript" src="includes/default.js">
+ </script>
+ <body onload="javascript:setFocus('CMSLogin','user');">
+ <table border="0" width="100%" height="100%">
+  <tr>
+    <td width="100%">
+      <div align="center">
+        <center>
+
+        <table border="0" width="350" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="100%" bgcolor="#9492C6">
+              <table border="0" width="100%" cellspacing="1">
+                <tr>
+                  <td width="100%" bgcolor="#E6E6E6">
+                    <table border="0" width="100%" cellpadding="2">
+                      <tr>
+                        <td width="100%">
+                          &nbsp;&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td width="100%" class="normal">
+                          <p align="center"><b>Empire Trade Staff and Licensee Intranet</b></td>
+                      </tr>
+                      <tr>
+                        <td width="100%">
+                          <p align="center">Welcome to your Administration System.</td>
+                      </tr>
+                      <tr>
+                        <td width="100%">
+                          &nbsp;&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td width="100%">
+                          <p align="center"><% if($_REQUEST['changePass']) { print '<span style="color: #FF0000; font-weight: bold">An Error Occured. Please Try Again.</span><br><br>'; } %>Logged in as: <b><%= $_SESSION['Username'] %></b><br>
+                          Password has Expired<br>
+                          <br>
+                          Select a new password below.
+                          </td>
+                      </tr>
+                     <form name="CMSLogin" method="POST" action="<%= $_SERVER[PHP_SELF]%>">
+                      <tr>
+                        <td width="100%" align="center"><br><B>PASSWORD CHANGE:</B><br><br>
+						Old Pass 1: <input name="oldpass" type="password" size="25" style="font-size: 7pt; font-family: Tahoma"><br>
+						<br>
+						New Pass 1: <input name="pass" type="password" size="25" style="font-size: 7pt; font-family: Tahoma"><br>
+						New Pass 2: <input name="pass2" type="password" size="25" style="font-size: 7pt; font-family: Tahoma"><br><br>
+                        <input type="hidden" name="changePass" value="1"><input type="submit" value=" Change " STYLE="font-family: Tahoma; font-size: 7pt; font-weight: bold"></td>
+                      </tr>
+                     </form>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        </center>
+      </div>
+    </td>
+  </tr>
+ </table>
+ </body>
+
+ </html>

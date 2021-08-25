@@ -1,0 +1,63 @@
+<html>
+<head>
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<script>
+
+var error = "<%= error %>";
+if (error == 'DISABLED') error = Text('disabled');
+
+// Set href to URL for image
+var href = "<%= href %>";
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+var request = "" + window.location;
+editor = requestParameter("editor");
+request_action = '<%= request.getParameter("action") %>';
+request_id = requestParameter("id");
+request_title = '<% if (myfileupload.get("title") != null) { %><%= myfileupload.get("title") %><% } %>';
+request_href = requestParameter("href");
+request_list = requestParameter("list");
+request_mediaclass = requestParameter("mediaclass");
+if (! request_list) request_list = 'medialist.jsp?editor=' + editor;
+
+</script>
+</head>
+<body>
+<script>
+	if (error != "") {
+		parent.medialist.document.location.href = request_list;
+		alert(error);
+		document.location.href = 'mediainsert.jsp?editor=' + editor;
+	} else {
+		if (request_action == "Delete") {
+			parent.ready_link = '';
+			parent.ready_href = '';
+			parent.ready_mediaclass = '';
+			parent.medialist.document.location.href = request_list;
+			document.location.href = 'mediainsert.jsp?action=server&editor=' + editor;
+		} else {
+			parent.ready_link = request_title;
+			parent.ready_href = href;
+			parent.ready_mediaclass = request_mediaclass;
+			parent.tag["href"] = href;
+			parent.medialist.document.location.href = request_list;
+			document.location.href = 'mediainsert.jsp?action=server&editor=' + editor;
+		}
+	}
+</script> 
+</body>
+</html>

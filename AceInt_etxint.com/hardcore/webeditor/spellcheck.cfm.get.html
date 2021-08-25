@@ -1,0 +1,77 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('spellcheck_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+window.focus();
+var request = "" + window.location;
+editor = requestParameter("editor");
+id = requestParameter("id");
+
+function initform() {
+	document.spellcheckform.id.value = id;
+	document.spellcheckform.content.value = top.opener.window.contenteditable_getContent(id);
+	if (document.spellcheckform.dictionary.length <= 1) document.spellcheckform.submit();
+}
+
+</script>
+</head>
+<body onload="initform()">
+<form name="spellcheckform" action="spellcheck.cfm" method="post">
+<input type="hidden" name="id" value="">
+<input type="hidden" name="content" value="">
+<table width="100%" border="0" class="dtree">
+	<tr align="left" valign="top"> 
+		<td colspan="4" class="webeditor_window_title"><script>document.write(Text('spellcheck_title'));</script></td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('spellcheck_dictionary'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute">
+							<select name="dictionary"><cfoutput>#spellcheckDictionaries#</cfoutput></select>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+</table>
+<br>
+<div align="center">
+<script>document.write('<input type="submit" value="' + Text('spellcheck_check') + '">');</script>
+<script>document.write('<input type="button" value="' + Text('cancel') + '" onClick="window.close()">');</script>
+</div>
+<cfif spellcheckCommand is "">
+<br>
+<div class="webeditor_window_value" style="color: red; font-weight: bold;">
+<script>document.write(Text('spellcheck_disabled'));</script>
+</div>
+</cfif>
+</form>
+</body>
+</html>

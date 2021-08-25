@@ -1,0 +1,6 @@
+[11-Mar-2019 09:44:14 UTC] PHP Warning:  require(PHPMailer/Exception.php): failed to open stream: No such file or directory in /home/etxint/admin.etxint.com/crontab/PHPMailer/index.php on line 7
+[11-Mar-2019 09:44:14 UTC] PHP Warning:  require(PHPMailer/Exception.php): failed to open stream: No such file or directory in /home/etxint/admin.etxint.com/crontab/PHPMailer/index.php on line 7
+[11-Mar-2019 09:44:14 UTC] PHP Fatal error:  require(): Failed opening required 'PHPMailer/Exception.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/etxint/admin.etxint.com/crontab/PHPMailer/index.php on line 7
+[11-Mar-2019 09:44:24 UTC] PHP Warning:  require(PHPMailer/Exception.php): failed to open stream: No such file or directory in /home/etxint/admin.etxint.com/crontab/PHPMailer/index.php on line 7
+[11-Mar-2019 09:44:24 UTC] PHP Warning:  require(PHPMailer/Exception.php): failed to open stream: No such file or directory in /home/etxint/admin.etxint.com/crontab/PHPMailer/index.php on line 7
+[11-Mar-2019 09:44:24 UTC] PHP Fatal error:  require(): Failed opening required 'PHPMailer/Exception.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/etxint/admin.etxint.com/crontab/PHPMailer/index.php on line 7

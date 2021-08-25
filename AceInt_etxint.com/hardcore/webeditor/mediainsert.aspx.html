@@ -1,0 +1,264 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" href="../dtree.css" type="text/css" />
+<script type="text/javascript" src="../dtree.js"></script>
+<link rel="stylesheet" type="text/css" href="../hardcore.css"> 
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('mediainsert_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+var request = "" + window.location;
+editor = requestParameter("editor");
+request_focus = requestParameter("focus");
+request_action = requestParameter("action");
+request_title = requestParameter("title");
+request_mediaclass = requestParameter("mediaclass");
+
+function InitForm() {
+	document.myform.href.value = parent.tag["href"];
+	if (document.myform.border) document.myform.border.value = parent.tag["border"];
+	if (document.myform.alt) document.myform.alt.value = parent.tag["alt"];
+	if (document.myform.width) document.myform.width.value = parent.tag["width"];
+	if (document.myform.height) document.myform.height.value = parent.tag["height"];
+	if (document.myform.vspace) document.myform.vspace.value = parent.tag["vspace"];
+	if (document.myform.hspace) document.myform.hspace.value = parent.tag["hspace"];
+	if (document.myform.align) document.myform.align.value = parent.tag["align"];
+	if (document.myform.onmouseover) document.myform.onmouseover.value = parent.tag["onmouseover"];
+	if (document.myform.onmouseout) document.myform.onmouseout.value = parent.tag["onmouseout"];
+	if (document.myform.htmlclass) document.myform.htmlclass.value = parent.tag["htmlclass"];
+	if (document.myform.htmlid) document.myform.htmlid.value = parent.tag["htmlid"];
+}
+
+function changedURL(url) {
+	parent.tag['href'] = url;
+	if (document.myform.border) parent.tag["border"] = document.myform.border.value;
+	if (document.myform.alt) parent.tag["alt"] = document.myform.alt.value;
+	if (document.myform.width) parent.tag["width"] = document.myform.width.value;
+	if (document.myform.height) parent.tag["height"] = document.myform.height.value;
+	if (document.myform.vspace) parent.tag["vspace"] = document.myform.vspace.value;
+	if (document.myform.hspace) parent.tag["hspace"] = document.myform.hspace.value;
+	if (document.myform.align) parent.tag["align"] = document.myform.align.value;
+	if (document.myform.onmouseover) parent.tag["onmouseover"] = document.myform.onmouseover.value;
+	if (document.myform.onmouseout) parent.tag["onmouseout"] = document.myform.onmouseout.value;
+	if (document.myform.htmlclass) parent.tag["htmlclass"] = document.myform.htmlclass.value;
+	if (document.myform.htmlid) parent.tag["htmlid"] = document.myform.htmlid.value;
+	if (url.substring(url.length-4) == ".swf") {
+		request_mediaclass = "flash";
+	} else if (url.substring(url.length-6) == ".class") {
+		request_mediaclass = "applet";
+	} else {
+		request_mediaclass = "image";
+	}
+	parent.mediapreview.location.href = 'mediapreview.aspx?editor=' + editor + '&href=' + url + '&mediaclass=' + request_mediaclass;
+	parent.mediainsert.location.href = 'mediainsert.aspx?action=server&editor=' + editor + '&mediaclass=' + request_mediaclass;
+}
+
+function CheckMediaFile() {
+	if (CheckMediaFileTitle() == false || CheckMediaFileExtension() == false) {
+		return false;
+	}
+	return true;
+}
+
+function CheckMediaFileTitle() {
+	if (parent.medialist.document.upload.title.value == "") {
+		alert(Text('mediainsert_entertitle'));
+		return false;
+	}
+	return true;
+}
+
+function CheckMediaFileExtension(cStr){
+	cStr = parent.medialist.document.upload.file.value;
+	if (cStr == "") { return false; }
+
+	var file_extension = cStr;
+	file_extension = file_extension.split(".");
+	file_extension = file_extension[file_extension.length - 1];
+	file_extension = file_extension.toLowerCase();
+
+	valid_extensions = "gif,jpg,jpeg,png,swf,class";
+	valid_extension = valid_extensions.split(",");
+	for (i=0; i<valid_extension.length; i++) {
+		if ( file_extension == valid_extension[i]) return true;
+	}
+	alert(Text('mediainsert_error') + ' ' + valid_extensions);
+	return false;
+}
+
+</script>
+<script>
+
+function ServerMediaFile(title, url) {
+	if (top.opener.closed) {
+		alert(Text('mediainsert_closed'));
+		return false;
+	} else if (url != "") {
+		if (document.myform.border) { border = document.myform.border.value; } else { border = ""; }
+		if (document.myform.alt) { alt = document.myform.alt.value; } else { alt = ""; }
+		if (document.myform.width) { width = document.myform.width.value; } else { width = ""; }
+		if (document.myform.height) { height = document.myform.height.value; } else { height = ""; }
+		if (document.myform.vspace) { vspace = document.myform.vspace.value; } else { vspace = ""; }
+		if (document.myform.hspace) { hspace = document.myform.hspace.value; } else { hspace = ""; }
+		if (document.myform.align) { align = document.myform.align.value; } else { align = ""; }
+		if (document.myform.onmouseover) { onmouseover = document.myform.onmouseover.value; } else { onmouseover = ""; }
+		if (document.myform.onmouseout) { onmouseout = document.myform.onmouseout.value; } else { onmouseout = ""; }
+		if (document.myform.htmlclass) { htmlclass = document.myform.htmlclass.value; } else { htmlclass = ""; }
+		if (document.myform.htmlid) { htmlid = document.myform.htmlid.value; } else { htmlid = ""; }
+		if (request_mediaclass == "flash") {
+			top.opener[editor].insertFlash(url, alt, width, height, htmlclass, htmlid);
+		} else if (request_mediaclass == "applet") {
+			top.opener[editor].insertApplet(url, alt, width, height, htmlclass, htmlid);
+		} else {
+			top.opener[editor].insertImage(url, border, alt, width, height, vspace, hspace, align, htmlclass, htmlid, onmouseover, onmouseout);
+		}
+		top.close();
+	}
+}
+
+</script>
+<script>
+
+function LocalMediaFile() {
+	if (top.opener.closed) {
+		alert(Text('mediainsert_closed'));
+	} else if (parent.medialist.document.upload.file.value == "") {
+		alert(Text('mediainsert_selectimage'));
+	} else if (parent.medialist.document.upload.title.value == "") {
+		alert(Text('mediainsert_entertitle'));
+	} else {
+		parent.medialist.document.upload.submit();
+	}
+}
+
+</script>
+<script>
+
+function NoMediaFile() {
+	if (top.opener.closed) {
+		alert(Text('mediainsert_closed'));
+	} else  {
+		alert(Text('mediainsert_selectimage'));
+	}
+}
+
+</script>
+</head>
+<body onLoad="InitForm(); if (request_focus == 'true') self.focus();">
+
+<script>
+if (request_action == "upload") {
+	document.writeln('<form id="myform" name="myform">');
+} else if (request_action == "local") {
+	document.writeln('<form action="mediainsert.aspx?editor=' + editor + '&action=upload" method="GET" id="myform" name="myform">');
+} else if (request_action == "server") {
+	document.writeln('<form action="mediainsert.aspx?editor=' + editor + '&action=local" method="GET" id="myform" name="myform">');
+} else {
+	document.writeln('<form action="mediainsert.aspx?editor=' + editor + '" method="GET" id="myform" name="myform">');
+}
+</script>
+
+<table width="100%" border="0" class="dtree">
+	<tr><th colspan="6" align="left"><script>document.write(Text('mediainsert_text'));</script></th></tr>
+	<tr>
+		<td><script>document.write(Text('mediainsert_address'));</script></td><td colspan="5"><input type="text" size="60" name="href" value="" onChange="javascript:changedURL(this.value);"></td>
+		<td rowspan="4" align="center">
+
+<script>
+if (request_action == "upload") {
+	document.writeln('<div align="center">' + Text('mediainsert_uploading') + '</div>');
+	document.writeln('<div align="center">' + Text('mediainsert_wait') + '</div>');
+	LocalMediaFile();
+} else if (request_action == "local") {
+	document.writeln('<input type="submit" name="insert_button" value="' + Text('ok') + '" onClick="return CheckMediaFile();">');
+	document.writeln('<input type="button" name="cancel_button" value="' + Text('cancel') + '" onClick="javascript:top.close();">');
+} else if (request_action == "server") {
+	document.writeln('<input type="submit" name="insert_button" value="' + Text('ok') + '" onClick="ServerMediaFile(\'' + request_title + '\',document.myform.href.value);">');
+	document.writeln('<input type="button" name="cancel_button" value="' + Text('cancel') + '" onClick="javascript:top.close();">');
+} else {
+	document.writeln('<input type="button" name="insert_button" value="' + Text('ok') + '" onClick="NoMediaFile();">');
+	document.writeln('<input type="button" name="cancel_button" value="' + Text('cancel') + '" onClick="javascript:top.close();">');
+}
+</script>
+
+		</td>
+	</tr>
+<script>
+if (request_mediaclass == "flash") {
+	document.writeln('<tr>');
+	document.writeln('<td>' + Text('mediainsert_width') + '</td><td><input type="text" size="5" name="width" value="" onChange="parent.tag[\'width\']=this.value"></td>');
+	document.writeln('<td>' + Text('mediainsert_id') + '</td><td><input type="text" size="5" name="htmlid" value="" onChange="parent.tag[\'htmlid\']=this.value"></td>');
+	document.writeln('<td>&nbsp;</td><td>&nbsp;</td>');
+	document.writeln('</tr>');
+	document.writeln('<tr>');
+	document.writeln('<td>' + Text('mediainsert_height') + '</td><td><input type="text" size="5" name="height" value="" onChange="parent.tag[\'height\']=this.value"></td>');
+	document.writeln('<td>' + Text('mediainsert_class') + '</td><td><input type="text" size="5" name="htmlclass" value="" onChange="parent.tag[\'htmlclass\']=this.value"></td>');
+	document.writeln('<td>&nbsp;</td><td>&nbsp;</td>');
+	document.writeln('</tr>');
+	document.writeln('<tr>');
+	document.writeln('<td>&nbsp;</td><td>&nbsp;</td>');
+	document.writeln('<td>&nbsp;</td><td>&nbsp;</td>');
+	document.writeln('<td>&nbsp;</td><td>&nbsp;</td>');
+	document.writeln('</tr>');
+} else if (request_mediaclass == "applet") {
+	document.writeln('<tr>');
+	document.writeln('<td>' + Text('mediainsert_width') + '</td><td><input type="text" size="5" name="width" value="" onChange="parent.tag[\'width\']=this.value"></td>');
+	document.writeln('<td>' + Text('mediainsert_id') + '</td><td><input type="text" size="5" name="htmlid" value="" onChange="parent.tag[\'htmlid\']=this.value"></td>');
+	document.writeln('</tr>');
+	document.writeln('<tr>');
+	document.writeln('<td>' + Text('mediainsert_height') + '</td><td><input type="text" size="5" name="height" value="" onChange="parent.tag[\'height\']=this.value"></td>');
+	document.writeln('<td>' + Text('mediainsert_class') + '</td><td><input type="text" size="5" name="htmlclass" value="" onChange="parent.tag[\'htmlclass\']=this.value"></td>');
+	document.writeln('</tr>');
+	document.writeln('<tr>');
+	document.writeln('<td>&nbsp;</td><td>&nbsp;</td>');
+	document.writeln('<td>&nbsp;</td><td>&nbsp;</td>');
+	document.writeln('<td>&nbsp;</td><td>&nbsp;</td>');
+	document.writeln('</tr>');
+} else {
+	document.writeln('<tr>');
+	document.writeln('<td>' + Text('mediainsert_width') + '</td><td><input type="text" size="5" name="width" value="" onChange="parent.tag[\'width\']=this.value"></td>');
+	document.writeln('<td>' + Text('mediainsert_border') + '</td><td><input type="text" size="5" name="border" value="" onChange="parent.tag[\'border\']=this.value"></td>');
+	document.writeln('<td>' + Text('mediainsert_vspace') + '</td><td><input type="text" size="5" name="vspace" value="" onChange="parent.tag[\'vspace\']=this.value"></td>');
+	document.writeln('</tr>');
+	document.writeln('<tr>');
+	document.writeln('<td>' + Text('mediainsert_height') + '</td><td><input type="text" size="5" name="height" value="" onChange="parent.tag[\'height\']=this.value"></td>');
+	document.writeln('<td>' + Text('mediainsert_alt') + '</td><td><input type="text" size="5" name="alt" value="" onChange="parent.tag[\'alt\']=this.value"></td>');
+	document.writeln('<td>' + Text('mediainsert_hspace') + '</td><td><input type="text" size="5" name="hspace" value="" onChange="parent.tag[\'hspace\']=this.value"></td>');
+	document.writeln('</tr>');
+	document.writeln('<tr>');
+	document.writeln('<td>' + Text('mediainsert_align') + '</td><td><select name="align" onChange="parent.tag[\'align\']=this.value"><option value="">' + Text('mediainsert_align_default') + '<option value="left">' + Text('mediainsert_align_left') + '<option value="right">' + Text('mediainsert_align_right') + '<option value="top">' + Text('mediainsert_align_top') + '<option value="bottom">' + Text('mediainsert_align_bottom') + '<option value="middle">' + Text('mediainsert_align_middle') + '<option value="absmiddle">' + Text('mediainsert_align_absmiddle') + '</select></td>');
+	document.writeln('<td>' + Text('mediainsert_id') + '</td><td><input type="text" size="5" name="htmlid" value="" onChange="parent.tag[\'htmlid\']=this.value"></td>');
+	document.writeln('<td>' + Text('mediainsert_class') + '</td><td><input type="text" size="5" name="htmlclass" value="" onChange="parent.tag[\'htmlclass\']=this.value"></td>');
+	document.writeln('</tr>');
+	document.writeln('<tr>');
+	document.writeln('<td>' + Text('mediainsert_onmouseover') + '</td><td colspan="2"><input type="mediainsert_onmouseover" size="20" name="onmouseover" value=""></td>');
+	document.writeln('<td>' + Text('mediainsert_onmouseout') + '</td><td colspan="2"><input type="mediainsert_onmouseover" size="20" name="onmouseout" value=""></td>');
+	document.writeln('</tr>');
+}
+</script>
+	<tr><td colspan="2" width="25%"></td><td colspan="2" width="25%"></td><td colspan="2" width="25%"></td><td width="25%"></td></tr>
+</table>
+</form>
+</body>
+</html>

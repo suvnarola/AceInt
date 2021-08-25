@@ -1,0 +1,1 @@
+<cfcookie name="AcceptLanguage" value="#CGI.HTTP_ACCEPT_LANGUAGE#">

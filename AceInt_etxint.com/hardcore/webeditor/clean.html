@@ -1,0 +1,105 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('clean_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+window.focus();
+var request = "" + window.location;
+editor = requestParameter("editor");
+
+function initform() {
+}
+
+function cleancontent(form) {
+	var all_html = form.all_html.checked;
+	var all_xml = form.all_xml.checked;
+	var all_namespace = form.all_namespace.checked;
+	var all_lang = form.all_lang.checked;
+	var all_class = form.all_class.checked;
+	var all_style = form.all_style.checked;
+	var empty_span = form.empty_span.checked;
+	var all_span = form.all_span.checked;
+	var empty_font = form.empty_font.checked;
+	var all_font = form.all_font.checked;
+	var all_del_ins = form.all_del_ins.checked;
+	var empty_p_div = form.empty_p_div.checked;
+	window.opener[editor].cleanContent(all_html,all_xml,all_namespace,all_lang,all_class,all_style,empty_span,all_span,empty_font,all_font,all_del_ins,empty_p_div);
+	window.close();
+}
+
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="initform();">
+<form onSubmit="javascript:cleancontent(this); return false;">
+<input type="hidden" name="type" value="hidden">
+<table width="100%" border="0" class="dtree">
+	<tr align="left" valign="top"> 
+		<td colspan="2" class="webeditor_window_title"><script>document.write(Text('clean_title'));</script></td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="1">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('clean_word'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_value"> 
+							<input type="checkbox" checked name="all_xml"><script>document.write(Text('clean_all_xml'));</script><br>
+							<input type="checkbox" checked name="all_namespace"><script>document.write(Text('clean_all_namespace'));</script><br>
+							<input type="checkbox" checked name="all_lang"><script>document.write(Text('clean_all_lang'));</script><br>
+							<input type="checkbox" checked name="empty_span"><script>document.write(Text('clean_empty_span'));</script><br>
+							<input type="checkbox" checked name="empty_font"><script>document.write(Text('clean_empty_font'));</script><br>
+							<input type="checkbox" checked name="all_del_ins"><script>document.write(Text('clean_all_del_ins'));</script><br>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+		<td colspan="1">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('clean_other'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_value"> 
+							<input type="checkbox" name="all_html"><script>document.write(Text('clean_all_html'));</script><br>
+							<input type="checkbox" name="all_class"><script>document.write(Text('clean_all_class'));</script><br>
+							<input type="checkbox" name="all_style"><script>document.write(Text('clean_all_style'));</script><br>
+							<input type="checkbox" name="all_span"><script>document.write(Text('clean_all_span'));</script><br>
+							<input type="checkbox" name="all_font"><script>document.write(Text('clean_all_font'));</script><br>
+							<input type="checkbox" name="empty_p_div"><script>document.write(Text('clean_empty_p_div'));</script><br>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+</table>
+<br>
+<div align="center">
+<script>document.write('<input type="submit" value="' + Text('ok') + '">');</script>
+<script>document.write('<input type="button" value="' + Text('cancel') + '" onClick="window.close()">');</script>
+</div>
+</form>
+</body>
+</html>

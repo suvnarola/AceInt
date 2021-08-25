@@ -1,0 +1,20 @@
+[25-Jul-2016 22:33:02 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 2
+[25-Jul-2016 22:34:02 UTC] PHP Warning:  mysql_connect(): Can't connect to MySQL server on 'db-04.server-logon.com' (4) in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 2
+[25-Jul-2016 22:34:02 UTC] PHP Deprecated:  mysql_select_db(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 3
+[25-Jul-2016 22:34:02 UTC] PHP Warning:  mysql_select_db(): Access denied for user 'root'@'localhost' (using password: NO) in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 3
+[25-Jul-2016 22:34:02 UTC] PHP Warning:  mysql_select_db(): A link to the server could not be established in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 3
+[25-Jul-2016 22:34:02 UTC] PHP Notice:  Undefined index: search in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 80
+[25-Jul-2016 22:34:02 UTC] PHP Notice:  Undefined index: search in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 85
+[25-Jul-2016 22:34:02 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 92
+[25-Jul-2016 22:34:02 UTC] PHP Warning:  mysql_query(): Access denied for user 'root'@'localhost' (using password: NO) in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 92
+[25-Jul-2016 22:34:02 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 92
+[07-Mar-2017 07:36:43 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 2
+[07-Mar-2017 07:37:43 UTC] PHP Warning:  mysql_connect(): Can't connect to MySQL server on 'db-04.server-logon.com' (4) in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 2
+[07-Mar-2017 07:37:43 UTC] PHP Deprecated:  mysql_select_db(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 3
+[07-Mar-2017 07:37:43 UTC] PHP Warning:  mysql_select_db(): Access denied for user 'etxint'@'localhost' (using password: NO) in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 3
+[07-Mar-2017 07:37:43 UTC] PHP Warning:  mysql_select_db(): A link to the server could not be established in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 3
+[07-Mar-2017 07:37:43 UTC] PHP Notice:  Undefined index: search in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 80
+[07-Mar-2017 07:37:43 UTC] PHP Notice:  Undefined index: search in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 85
+[07-Mar-2017 07:37:43 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 92
+[07-Mar-2017 07:37:43 UTC] PHP Warning:  mysql_query(): Access denied for user 'etxint'@'localhost' (using password: NO) in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 92
+[07-Mar-2017 07:37:43 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/etxint/admin.etxint.com/adminup/helpsystem/index.php on line 92

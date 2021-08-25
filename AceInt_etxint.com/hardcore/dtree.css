@@ -1,0 +1,50 @@
+.dtree {
+	position: relative;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #666;
+	white-space: nowrap;
+}
+.dtree img {
+	border: 0px;
+	vertical-align: text-bottom;
+}
+.dtree a {
+	font-size: 10pt;
+	text-decoration: none;
+}
+.dtree a:visited {
+	font-size: 10pt;
+	text-decoration: none;
+}
+.dtree a:hover {
+	color: #666;
+	font-size: 10pt;
+	text-decoration: none;
+}
+.dtree .node {
+	position: relative;
+	top: -2px;
+	padding: 1px;
+	color: #666;
+	font-size: 10pt;
+}
+.dtree .nodeSel {
+	position: relative;
+	top: -2px;
+	padding: 1px;
+	color: #ffffff;
+	background-color: #cc0000;
+	font-size: 10pt;
+	text-decoration: none;
+}
+.dtree a:visited .node {
+	color: #666;
+	font-size: 10pt;
+	text-decoration: none;
+}
+.dtree a:hover .node {
+	color: #cc0000;
+	font-size: 10pt;
+	text-decoration: underline;
+}

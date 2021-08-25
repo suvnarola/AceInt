@@ -1,0 +1,49 @@
+.adminUpdates {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+.adminUpdates-title {
+	font-weight: bold;
+	font-size: 18px;
+	text-align: center;
+	padding: 3px;
+	border-bottom-width: 2px;
+	border-bottom-color: #000000;
+	border-bottom-style: solid;
+}
+.adminUpdates-content {
+}
+.adminUpdates-monthTitle {
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+}
+.noPrint {
+	display: none;
+}
+.searchHighlight {
+	padding-bottom: 1px;
+	text-decoration: underline;
+}
+<!-- Updates -->
+.adminUpdate {
+	padding-top: 3px;
+	padding-bottom: 10px;
+}
+.adminUpdate-date {
+	font-size: 10px;
+	font-weight: bold;
+	text-align: right;
+	padding-bottom: 3px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #000000;
+}
+.adminUpdate-content {
+	font-size: 11px;
+	text-align: justify;
+}
+<!-- Menu -->
+.adminUpdates-menu {
+	display: none;
+}

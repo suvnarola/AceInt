@@ -1,0 +1,286 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('select_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+window.focus();
+var request = "" + window.location;
+editor = requestParameter("editor");
+
+function initform() {
+	document.forms[0].name.value = unescape(request.match(new RegExp("^.*\?.*[?&]name=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]name=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].size.value = unescape(request.match(new RegExp("^.*\?.*[?&]size=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]size=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].multiple.value = unescape(request.match(new RegExp("^.*\?.*[?&]multiple=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]multiple=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].onclick.value = unescape(request.match(new RegExp("^.*\?.*[?&]onclick=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]onclick=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].onchange.value = unescape(request.match(new RegExp("^.*\?.*[?&]onchange=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]onchange=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].onfocus.value = unescape(request.match(new RegExp("^.*\?.*[?&]onfocus=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]onfocus=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].onblur.value = unescape(request.match(new RegExp("^.*\?.*[?&]onblur=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]onblur=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].htmlclass.value = unescape(request.match(new RegExp("^.*\?.*[?&]htmlclass=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]htmlclass=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].htmlid.value = unescape(request.match(new RegExp("^.*\?.*[?&]htmlid=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]htmlid=([^&]+).*$", "i"), "$1") : "");
+	var options = window.opener.webeditor_selectlist_options();
+	if (options) {
+		for (var i=0; i<options.length; i++) {
+			var option = new Option();
+			option.text = options[i].text;
+			option.value = options[i].value;
+			option.defaultselected = options[i].selected;
+			if (option.defaultselected) {
+				option.style.backgroundColor = "#C0C0C0";
+			} else {
+				option.style.backgroundColor = "";
+			}
+			document.forms[0].options.options[i] = option;
+		}
+	}
+}
+
+function insertselect(form) {
+	var name = form.name.value;
+	var size = form.size.value;
+	var multiple = form.multiple.value;
+	var options = form.options.options;
+	var onclick = form.onclick.value;
+	var onchange = form.onchange.value;
+	var onfocus = form.onfocus.value;
+	var onblur = form.onblur.value;
+	var htmlclass = form.htmlclass.value;
+	var htmlid = form.htmlid.value;
+	window.opener[editor].insertSelect(name,size,multiple,options,onclick,onchange,onfocus,onblur,htmlclass,htmlid);
+	window.close();
+}
+
+function select_option(form) {
+	form.text.value = form.options.options[form.options.selectedIndex].text;
+	form.value.value = form.options.options[form.options.selectedIndex].value;
+	form.selected.checked = form.options.options[form.options.selectedIndex].defaultselected;
+}
+
+function add_option(form) {
+	var option = new Option();
+	option.text = form.text.value;
+	option.value = form.value.value;
+	option.defaultselected = form.selected.checked;
+	if (form.selected.checked) {
+		option.style.backgroundColor = "#C0C0C0";
+	} else {
+		option.style.backgroundColor = "";
+	}
+	form.options.options[form.options.length] = option;
+	form.options.selectedIndex = form.options.length-1;
+}
+
+function update_option(form) {
+	form.options.options[form.options.selectedIndex].text = form.text.value;
+	form.options.options[form.options.selectedIndex].value = form.value.value;
+	form.options.options[form.options.selectedIndex].defaultselected = form.selected.checked;
+	if (form.selected.checked) {
+		form.options.options[form.options.selectedIndex].style.backgroundColor = "#C0C0C0";
+	} else {
+		form.options.options[form.options.selectedIndex].style.backgroundColor = "";
+	}
+}
+
+function remove_option(form) {
+	var selected = form.options.selectedIndex;
+	form.options.options[form.options.selectedIndex] = null;
+	if (form.options.length-1 < selected) {
+		form.options.selectedIndex = form.options.length-1;
+	} else {
+		form.options.selectedIndex = selected;
+	}
+}
+
+function move_option_up(form) {
+	if (form.options.selectedIndex > 0) {
+		var text = form.options.options[form.options.selectedIndex].text;
+		var value = form.options.options[form.options.selectedIndex].value;
+		var defaultselected = form.options.options[form.options.selectedIndex].defaultselected;
+		var backgroundColor = form.options.options[form.options.selectedIndex].style.backgroundColor;
+		form.options.options[form.options.selectedIndex].text = form.options.options[form.options.selectedIndex-1].text;
+		form.options.options[form.options.selectedIndex].value = form.options.options[form.options.selectedIndex-1].value;
+		form.options.options[form.options.selectedIndex].defaultselected = form.options.options[form.options.selectedIndex-1].defaultselected;
+		form.options.options[form.options.selectedIndex].style.backgroundColor = form.options.options[form.options.selectedIndex-1].style.backgroundColor;
+		form.options.options[form.options.selectedIndex-1].text = text;
+		form.options.options[form.options.selectedIndex-1].value = value;
+		form.options.options[form.options.selectedIndex-1].defaultselected = defaultselected;
+		form.options.options[form.options.selectedIndex-1].style.backgroundColor = backgroundColor;
+		form.options.selectedIndex--;
+	}
+}
+
+function move_option_down(form) {
+	if ((form.options.selectedIndex >= 0) && (form.options.selectedIndex < form.options.length-1)) {
+		var text = form.options.options[form.options.selectedIndex].text;
+		var value = form.options.options[form.options.selectedIndex].value;
+		var defaultselected = form.options.options[form.options.selectedIndex].defaultselected;
+		var backgroundColor = form.options.options[form.options.selectedIndex].style.backgroundColor;
+		form.options.options[form.options.selectedIndex].text = form.options.options[form.options.selectedIndex+1].text;
+		form.options.options[form.options.selectedIndex].value = form.options.options[form.options.selectedIndex+1].value;
+		form.options.options[form.options.selectedIndex].defaultselected = form.options.options[form.options.selectedIndex+1].defaultselected;
+		form.options.options[form.options.selectedIndex].style.backgroundColor = form.options.options[form.options.selectedIndex+1].style.backgroundColor;
+		form.options.options[form.options.selectedIndex+1].text = text;
+		form.options.options[form.options.selectedIndex+1].value = value;
+		form.options.options[form.options.selectedIndex+1].defaultselected = defaultselected;
+		form.options.options[form.options.selectedIndex+1].style.backgroundColor = backgroundColor;
+		form.options.selectedIndex++;
+	}
+}
+
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="initform();">
+<form onSubmit="javascript:insertselect(this); return false;">
+<table width="100%" border="0" class="dtree">
+	<tr align="left" valign="top"> 
+		<td colspan="3" class="webeditor_window_title"><script>document.write(Text('select_title'));</script></td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td>
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('select_select'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('select_select_name'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="name" size="20" value="">
+						</td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('select_select_multiple'));</script></td>
+						<td class="webeditor_window_value"> 
+							<select name="multiple">
+								<option value=""><script>document.write(Text('select_select_multiple_no'));</script>
+								<option value="multiple"><script>document.write(Text('select_select_multiple_yes'));</script>
+							</select>
+						</td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('select_select_size'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="size" size="3" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+		<td rowspan="3" valign="top">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('select_options'));</script></legend>
+				<table border="0" height="100%">
+					<tr align="left" valign="top"> 
+						<td class="webeditor_window_attribute"><script>document.write(Text('select_options_text'));</script></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('select_options_value'));</script></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('select_options_selected'));</script></td>
+					</tr>
+					<tr align="left" valign="top"> 
+						<td colspan="1"> 
+				        		<input type="text" name="text" value="">
+						</td>
+						<td colspan="1"> 
+				        		<input type="text" name="value" value="">
+						</td>
+						<td colspan="1"> 
+				        		<input type="checkbox" name="selected" value="checked">
+						</td>
+					</tr>
+					<tr align="left" valign="top"> 
+						<td colspan="3" align="center"> 
+				        		<script>document.write('<input type="button" value="' + Text('select_options_add') + '" onClick="add_option(this.form)">');</script>
+				        		<script>document.write('<input type="button" value="' + Text('select_options_update') + '" onClick="update_option(this.form)">');</script>
+				        		<script>document.write('<input type="button" value="' + Text('select_options_remove') + '" onClick="remove_option(this.form)">');</script>
+						</td>
+					</tr>
+					<tr align="left" valign="top"> 
+						<td colspan="3"> 
+				        		<select name="options" multiple size="7" onChange="select_option(this.form)" style="width: 100%;">
+				        		</select>
+						</td>
+					</tr>
+					<tr align="left" valign="top"> 
+						<td colspan="3" align="center"> 
+				        		<script>document.write('<input type="button" value="' + Text('select_options_moveup') + '" onClick="move_option_up(this.form)">');</script>
+				        		<script>document.write('<input type="button" value="' + Text('select_options_movedown') + '" onClick="move_option_down(this.form)">');</script>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td>
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('select_events'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('select_events_onclick'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="onclick" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('select_events_onchange'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="onchange" size="20" value="">
+						</td>
+					</tr>
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('select_events_onfocus'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="onfocus" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('select_events_onblur'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="onblur" size="20" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td>
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('class_id'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('htmlclass'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="htmlclass" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('htmlid'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="htmlid" size="20" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+</table>
+<br>
+<div align="center">
+<script>document.write('<input type="submit" value="' + Text('ok') + '">');</script>
+<script>document.write('<input type="button" value="' + Text('cancel') + '" onClick="window.close()">');</script>
+</div>
+</form>
+</body>
+</html>

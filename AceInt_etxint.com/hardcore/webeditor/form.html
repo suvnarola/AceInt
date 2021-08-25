@@ -1,0 +1,157 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('form_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+window.focus();
+var request = "" + window.location;
+editor = requestParameter("editor");
+
+function initform() {
+	document.forms[0].action.value = unescape(request.match(new RegExp("^.*\?.*[?&]action=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]action=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].method.value = unescape(request.match(new RegExp("^.*\?.*[?&]method=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]method=([^&]+).*$", "i"), "$1") : "").toUpperCase();
+	document.forms[0].enctype.value = unescape(request.match(new RegExp("^.*\?.*[?&]enctype=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]enctype=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].target.value = unescape(request.match(new RegExp("^.*\?.*[?&]target=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]target=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].onsubmit.value = unescape(request.match(new RegExp("^.*\?.*[?&]onsubmit=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]onsubmit=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].onreset.value = unescape(request.match(new RegExp("^.*\?.*[?&]onreset=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]onreset=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].htmlclass.value = unescape(request.match(new RegExp("^.*\?.*[?&]htmlclass=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]htmlclass=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].htmlid.value = unescape(request.match(new RegExp("^.*\?.*[?&]htmlid=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]htmlid=([^&]+).*$", "i"), "$1") : "");
+}
+
+function insertform(form) {
+	var action = form.action.value;
+	var method = form.method.value;
+	var enctype = form.enctype.value;
+	var target = form.target.value;
+	var onsubmit = form.onsubmit.value;
+	var onreset = form.onreset.value;
+	var htmlclass = form.htmlclass.value;
+	var htmlid = form.htmlid.value;
+	window.opener[editor].insertForm(action,method,enctype,target,onsubmit,onreset,htmlclass,htmlid);
+	window.close();
+}
+
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="initform();">
+<form onSubmit="javascript:insertform(this); return false;">
+<table width="100%" border="0" class="dtree">
+	<tr align="left" valign="top"> 
+		<td colspan="4" class="webeditor_window_title"><script>document.write(Text('form_title'));</script></td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('form_form'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('form_form_method'));</script></td>
+						<td class="webeditor_window_value"> 
+							<select name="method" style="width: 75px;">
+								<option value="" selected>
+								<option value="GET"><script>document.write(Text('form_form_method_get'));</script>
+								<option value="POST"><script>document.write(Text('form_form_method_post'));</script>
+							</select>
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('form_form_action'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="action" size="20" value="">
+						</td>
+					</tr>
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('form_form_target'));</script></td>
+						<td class="webeditor_window_value"> 
+							<select name="target" style="width: 75px;">
+								<option value="" selected>&nbsp;
+								<option value="_self"><script>document.write(Text('form_form_target_self'));</script>
+								<option value="_parent"><script>document.write(Text('form_form_target_parent'));</script>
+								<option value="_top"><script>document.write(Text('form_form_target_top'));</script>
+								<option value="_blank"><script>document.write(Text('form_form_target_blank'));</script>
+							</select>
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('form_form_encoding'));</script></td>
+						<td class="webeditor_window_value"> 
+							<select name="enctype">
+								<option value="" selected>
+								<option value="application/x-www-form-urlencoded"><script>document.write(Text('form_form_encoding_urlencoded'));</script>
+								<option value="multipart/form-data"><script>document.write(Text('form_form_encoding_multipart'));</script>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('form_events'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('form_events_onsubmit'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="onsubmit" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('form_events_onreset'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="onreset" size="20" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('class_id'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('htmlclass'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="htmlclass" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('htmlid'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="htmlid" size="20" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+</table>
+<br>
+<div align="center">
+<script>document.write('<input type="submit" value="' + Text('ok') + '">');</script>
+<script>document.write('<input type="button" value="' + Text('cancel') + '" onClick="window.close()">');</script>
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('box_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+window.focus();
+var request = "" + window.location;
+editor = requestParameter("editor");
+
+function initform() {
+	document.forms[0].width.value = unescape(request.match(new RegExp("^.*\?.*[?&]width=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]width=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].height.value = unescape(request.match(new RegExp("^.*\?.*[?&]height=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]height=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].borderwidth.value = unescape(request.match(new RegExp("^.*\?.*[?&]borderwidth=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]borderwidth=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].borderstyle.value = unescape(request.match(new RegExp("^.*\?.*[?&]borderstyle=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]borderstyle=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].bordercolor.value = unescape(request.match(new RegExp("^.*\?.*[?&]bordercolor=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]bordercolor=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].backgroundcolor.value = unescape(request.match(new RegExp("^.*\?.*[?&]backgroundcolor=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]backgroundcolor=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].htmlclass.value = unescape(request.match(new RegExp("^.*\?.*[?&]htmlclass=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]htmlclass=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].htmlid.value = unescape(request.match(new RegExp("^.*\?.*[?&]htmlid=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]htmlid=([^&]+).*$", "i"), "$1") : "");
+	if (document.getElementById("bordercolor_preview")) document.getElementById("bordercolor_preview").style.backgroundColor = document.forms[0].bordercolor.value;
+	if (document.getElementById("backgroundcolor_preview")) document.getElementById("backgroundcolor_preview").style.backgroundColor = document.forms[0].backgroundcolor.value;
+}
+
+function insertbox(form) {
+	var width = form.width.value;
+	var height = form.height.value;
+	var borderwidth = form.borderwidth.value;
+	var borderstyle = form.borderstyle.value;
+	var bordercolor = form.bordercolor.value;
+	var backgroundcolor = form.backgroundcolor.value;
+	var htmlclass = form.htmlclass.value;
+	var htmlid = form.htmlid.value;
+	window.opener[editor].insertBox(width,height,borderwidth,borderstyle,bordercolor,backgroundcolor,htmlclass,htmlid);
+	window.close();
+}
+
+var box = new Object();
+box.backgroundcolor = function (color) {
+	try {
+		document.forms[0].backgroundcolor.value = color;
+		if (document.getElementById("backgroundcolor_preview")) document.getElementById("backgroundcolor_preview").style.backgroundColor = color;
+	} catch(e) {
+	}
+}
+
+box.bordercolor = function (color) {
+	try {
+		document.forms[0].bordercolor.value = color;
+		if (document.getElementById("bordercolor_preview")) document.getElementById("bordercolor_preview").style.backgroundColor = color;
+	} catch(e) {
+	}
+}
+
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="initform();">
+<form onSubmit="javascript:insertbox(this); return false;">
+<table width="100%" border="0" class="dtree">
+	<tr align="left" valign="top"> 
+		<td colspan="4" class="webeditor_window_title"><script>document.write(Text('box_title'));</script></td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('box_size'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('box_size_width'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="width" size="5" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('box_size_height'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="height" size="5" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="2" width="50%">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('box_border'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('box_border_width'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="borderwidth" size="5" value="">
+						</td>
+					</tr>
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('box_border_style'));</script></td>
+						<td class="webeditor_window_value"> 
+							<select name="borderstyle">
+								<option value="">
+								<option value="none"><script>document.write(Text('box_border_style_none'));</script>
+								<option value="dotted"><script>document.write(Text('box_border_style_dotted'));</script>
+								<option value="dashed"><script>document.write(Text('box_border_style_dashed'));</script>
+								<option value="solid"><script>document.write(Text('box_border_style_solid'));</script>
+								<option value="double"><script>document.write(Text('box_border_style_double'));</script>
+								<option value="groove"><script>document.write(Text('box_border_style_groove'));</script>
+								<option value="ridge"><script>document.write(Text('box_border_style_ridge'));</script>
+								<option value="inset"><script>document.write(Text('box_border_style_inset'));</script>
+								<option value="outset"><script>document.write(Text('box_border_style_outset'));</script>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+		<td colspan="2" width="50%">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('box_color'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('box_color_border'));</script></td>
+						<td class="webeditor_window_value"> 
+							<nobr><input type="text" name="bordercolor" size="8" value="" onChange="javascript:box.bordercolor(this.value);"><a target="_blank" onClick="javascript:window.open('colour.html?editor=box&attribute=bordercolor', 'colour_window', ',width=400,height=325,scrollbars=yes,resizable=yes,status=yes', true);"><img id="bordercolor_preview" style="border: 1px outset; background-color: white; width: 21px; height: 20px; vertical-align: top" src="spacer.gif"><img style="border: 1px outset; background-color: #C0C0C0; vertical-align: top" src="backcolor.gif" width="21" height="20"></a></nobr>
+						</td>
+					</tr>
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('box_color_background'));</script></td>
+						<td class="webeditor_window_value"> 
+							<nobr><input type="text" name="backgroundcolor" size="8" value="" onChange="javascript:box.backgroundcolor(this.value);"><a target="_blank" onClick="javascript:window.open('colour.html?editor=box&attribute=backgroundcolor', 'colour_window', ',width=400,height=325,scrollbars=yes,resizable=yes,status=yes', true);"><img id="backgroundcolor_preview" style="border: 1px outset; background-color: white; width: 21px; height: 20px; vertical-align: top" src="spacer.gif"><img style="border: 1px outset; background-color: #C0C0C0; vertical-align: top" src="backcolor.gif" width="21" height="20"></a></nobr>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('class_id'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('htmlclass'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="htmlclass" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('htmlid'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="htmlid" size="20" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+</table>
+<br>
+<div align="center">
+<script>document.write('<input type="submit" value="' + Text('ok') + '">');</script>
+<script>document.write('<input type="button" value="' + Text('cancel') + '" onClick="window.close()">');</script>
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!--
+	.inputBoxes {
+
+		border: 0px solid #ffffff;
+		font-family: Verdana;
+		font-size: 8pt;
+
+	}
+
+	td {
+
+		font-family: Tahoma;
+		font-size: 8pt;
+		font-weight: normal;
+		color: #000000;
+
+	}
+
+	.blueBackground {
+
+		background: #68B7D4;
+
+	}
+
+	.redBackground {
+
+		background: #EB3A3F;
+
+	}
+
+	.greenBackground {
+
+		background: #6E8A95;
+
+	}
+
+	.blueBackgroundBottomLeft {
+
+		border-top: #68B7D4;
+		border-right: #68B7D4;
+
+	}
+
+	.greyBackground {
+
+		background: #EEEEEE;
+
+	}
+
+	.formContainer {
+
+		font-family: Verdana;
+		font-size: 8pt;
+		padding: 0px;
+		border-spacing: 0px;
+		background: #ffffff;
+
+	}
+
+	.leftSide {
+
+		width: 120px;
+		text-align: right;
+		vertical-align: top;
+		right: 2px;
+
+	}
+
+	.rightSide {
+
+		width: 400px;
+		text-align: left;
+		vertical-align: top;
+
+	}
+
+	.cornerTopLeftStraight {
+
+		background-image: url('/images/corner-top-left-straight.gif');
+		width: 3px;
+		height: 3px;
+
+	}
+
+	.cornerTopLeft {
+
+		background-image: url('/images/corner-top-left.gif');
+		width: 3px;
+		height: 3px;
+
+	}
+
+	.cornerTopRight {
+
+		background-image: url('/images/corner-top-right.gif');
+		width: 3px;
+		height: 3px;
+
+	}
+
+	.cornerBottomLeft {
+
+		background-image: url('/images/corner-bottom-left.gif');
+		width: 3px;
+		height: 3px;
+
+	}
+
+	.cornerBottomLeftStraight {
+
+		background-image: url('/images/corner-bottom-left-straight.gif');
+		width: 3px;
+		height: 3px;
+
+	}
+
+	.cornerBottomRight {
+
+		background-image: url('/images/corner-bottom-right.gif');
+		width: 3px;
+		height: 3px;
+
+	}
+
+	.middleTop {
+
+		height: 3px;
+		background-image: url('/images/border-image.gif');
+		background-repeat: repeat-x;
+
+	}
+
+	.middleRight {
+
+		width: 3px;
+		background-image: url('/images/border-image.gif');
+		background-repeat: repeat-y;
+		background-position: right;
+
+	}
+
+	.middleLeft {
+
+		width: 3px;
+		background-image: url('/images/border-image.gif');
+		background-repeat: repeat-y;
+
+	}
+
+	.middleBottom {
+
+		height: 3px;
+		background-image: url('/images/border-image.gif');
+		background-repeat: repeat-x;
+		background-position: bottom;
+
+	}
+
+	.mainContentRight {
+
+		font-family: Verdana;
+		font-size: 8pt;
+		padding: 2px 2px 1px 2px;
+
+	}
+
+	.customPadding {
+
+		padding: 1px 2px 0px 2px;
+
+	}
+
+	.mainContentRightText {
+
+		font-family: Verdana;
+		font-size: 8pt;
+		font-weight: bold;
+		color: #333333;
+		padding: 4px 4px 3px 4px;
+
+	}
+
+	.mainContentLeft {
+
+		padding: 4px;
+		width: 120px;
+		font-family: Verdana;
+		font-size: 7pt;
+		font-weight: bold;
+		text-align: right;
+
+	}
+
+	.alignRight {
+
+		float: right;
+
+	}
+
+	.submitButton {
+
+		font-weight: bold;
+		font-size: 7pt;
+		color: #FFFFFF;
+		padding: 3px 10px 3px 10px;
+
+	}
+
+	.cursorHand {
+
+		cursor: hand;
+		cursor: pointer;
+
+	}
+
+	.formHeading {
+
+		font-family: Verdana;
+		font-weight: bold;
+		color: #333333;
+		padding: 5px 5px 15px 2px;
+
+	}
+
+	.errorMsg {
+
+		padding: 10px;
+		text-align: left;
+		width: 600;
+		font-weight: bold;
+		color: #FF0000;
+		border: 1px solid #000000;
+
+	}
+
+.Border {
+	background-color: #0E1B2A; }
+.Heading     {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #97A5BB; }
+.Heading12     {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #FA7B7B; }
+.Heading13     {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #7BBBF8; }
+.Heading14     {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #FDF188; }
+.Heading15     {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #8AFBB4; }
+.Heading2     {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #000000;
+	background-color: #97A5BB; }
+.Heading22     {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #000000;
+	background-color: #FA7B7B; }
+.Heading23     {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #000000;
+	background-color: #7BBBF8; }
+.Heading24     {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #000000;
+	background-color: #FDF188; }
+.Heading25     {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #000000;
+	background-color: #8AFBB4; }
+.Heading3     {
+	font-family: Tahoma;
+	font-size: 6pt;
+	font-weight: bold;
+	color: #000000;
+	background-color: #97A5BB; }
+.Cell1     {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: normal;
+	color: #000000;
+	background-color: #97A5BB; }
+a.nav:link {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none; }
+a.nav:visited {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none; }
+a.nav:hover {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: underline; }
+a.nav2:link {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none; }
+a.nav2:visited {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none; }
+a.nav2:hover {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: underline; }
+a.nav3:link {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #0000FF;
+	text-decoration: underline; }
+a.nav3:visited {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #0000FF;
+	text-decoration: underline; }
+a.nav3:hover {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #0000FF;
+	text-decoration: underline; }
+.test {
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: normal;
+	color: #000000; }
+textarea.desc {
+	font-family: Tahoma;
+	font-size: 7pt;
+	font-weight: normal;
+	color: #000000; }
+	.serviceDataCredit {
+
+		border: 1px solid #333333;
+		padding: 10px;
+		margin-top: 40px;
+		zindex: 10;
+		width: 600px;
+		display: block;
+
+	}
+
+	.displayText {
+
+		margin-left: 170px;
+		margin-top: 6px;
+		margin-bottom: 6px;
+		margin-right: 10px;
+		font-weight: bold;
+
+	}
+
+	.leftHeading {
+
+		width: 160px;
+		margin-top: 6px;
+		margin-right: 10px;
+		text-align: right;
+		vertical-align: middle;
+		float: left;
+		font-weight: bold;
+
+	}
+
+	.detailDataEntry {
+
+		padding: 2px;
+		height:	15px;
+		margin-top: 3px;
+
+	}
+
+	.bgLightGrey {
+
+		background: #CCCCCC;
+
+	}
+
+	.serviceInput {
+
+		padding: 3px;
+		border: 1px solid #464675;
+
+	}
+
+	.serviceButton	{
+
+		margin-left: 170px;
+		margin-top: 2px;
+		height: 22px;
+		font-size: 12px;
+		width: 130px;
+		color: #000000;
+		text-align: center;
+		background-image: url("../images/button.gif");
+		background-repeat: repeat-x;
+		border: 1px solid #326BC0;
+
+	}
+
+	.serviceDataCredit {
+
+		border: 1px solid #333333;
+		padding: 10px;
+		margin-top: 40px;
+		zindex: 10;
+		width: 600px;
+		display: block;
+
+	}
+
+-->

@@ -1,0 +1,1 @@
+<% Response.Cookies["AcceptLanguage"].Value = Request.ServerVariables["HTTP_ACCEPT_LANGUAGE"]; %>

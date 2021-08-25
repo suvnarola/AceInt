@@ -1,0 +1,2 @@
+[12-Oct-2018 09:41:45 UTC] PHP Fatal error:  Call to undefined function pdf_new() in /home/etxint/admin.etxint.com/pdf/pdf.php on line 5
+[03-Dec-2020 03:52:40 UTC] PHP Warning:  Module 'PDFlib' already loaded in Unknown on line 0

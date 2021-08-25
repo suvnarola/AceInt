@@ -1,0 +1,79 @@
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+/* #### HARDCORE WEB EDITOR ########################################################################### */
+.webeditor_icon {
+}
+
+.webeditor_icon_selected {
+}
+
+.webeditor_icon_disabled {
+}
+
+.webeditor_icon_mouseover {
+}
+
+.webeditor_icon_mousedown {
+}
+
+.webeditor_icon_mouseup {
+}
+
+.webeditor_icon_mouseout {
+}
+
+.webeditor_button {
+}
+
+.webeditor_button_selected {
+}
+
+.webeditor_button_disabled {
+}
+
+.webeditor_button_mouseover {
+}
+
+.webeditor_button_mousedown {
+}
+
+.webeditor_button_mouseup {
+}
+
+.webeditor_button_mouseout {
+}
+
+.webeditor_select {
+}
+
+.webeditor_select_disabled {
+}
+
+.webeditor_toolbar {
+}
+
+.webeditor_DOM_inspector, .webeditor_DOM_inspector TD {
+}
+
+.webeditor_colour {
+}
+
+.webeditor_colour_mouseover {
+}
+
+.webeditor_window_title {
+}
+
+.webeditor_window_heading {
+}
+
+.webeditor_window_attribute {
+}
+
+.webeditor_window_value {
+}
+
+fieldset {
+}

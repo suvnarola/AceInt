@@ -1,0 +1,48 @@
+[05-Dec-2016 09:41:20 UTC] PHP Deprecated:  mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/etxint/admin.etxint.com/auction/includes/global.php on line 7
+[05-Dec-2016 09:41:20 UTC] PHP Warning:  mysql_pconnect(): Access denied for user 'empireDB'@'localhost' (using password: YES) in /home/etxint/admin.etxint.com/auction/includes/global.php on line 7
+[05-Dec-2016 09:41:20 UTC] PHP Notice:  Use of undefined constant DEBUG - assumed 'DEBUG' in /home/etxint/admin.etxint.com/auction/includes/global.php on line 9
+[05-Dec-2016 09:41:20 UTC] PHP Notice:  Use of undefined constant Username - assumed 'Username' in /home/etxint/admin.etxint.com/auction/includes/global.php on line 11
+[05-Dec-2016 09:41:20 UTC] PHP Notice:  Use of undefined constant REMOTE_USER - assumed 'REMOTE_USER' in /home/etxint/admin.etxint.com/auction/includes/global.php on line 11
+[05-Dec-2016 09:41:20 UTC] PHP Notice:  Undefined index: REMOTE_USER in /home/etxint/admin.etxint.com/auction/includes/global.php on line 11
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Use of undefined constant page - assumed 'page' in /home/etxint/admin.etxint.com/auction/main.php on line 179
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Undefined index: page in /home/etxint/admin.etxint.com/auction/main.php on line 179
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Use of undefined constant auction - assumed 'auction' in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 16
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Undefined index: auction in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 16
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Use of undefined constant tab - assumed 'tab' in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 16
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Undefined index: tab in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 16
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Use of undefined constant tab - assumed 'tab' in /home/etxint/admin.etxint.com/auction/includes/global.php on line 78
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Undefined index: tab in /home/etxint/admin.etxint.com/auction/includes/global.php on line 78
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Use of undefined constant tab - assumed 'tab' in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 30
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Undefined index: tab in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 30
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Use of undefined constant tab - assumed 'tab' in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 34
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Undefined index: tab in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 34
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Use of undefined constant tab - assumed 'tab' in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 60
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Undefined index: tab in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 60
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Use of undefined constant tab - assumed 'tab' in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 72
+[05-Dec-2016 09:41:21 UTC] PHP Notice:  Undefined index: tab in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 72
+[06-Dec-2016 05:49:32 UTC] PHP Deprecated:  mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/etxint/admin.etxint.com/auction/includes/global.php on line 7
+[06-Dec-2016 05:49:32 UTC] PHP Warning:  mysql_pconnect(): Access denied for user 'empireDB'@'localhost' (using password: YES) in /home/etxint/admin.etxint.com/auction/includes/global.php on line 7
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Use of undefined constant DEBUG - assumed 'DEBUG' in /home/etxint/admin.etxint.com/auction/includes/global.php on line 9
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Use of undefined constant Username - assumed 'Username' in /home/etxint/admin.etxint.com/auction/includes/global.php on line 11
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Use of undefined constant REMOTE_USER - assumed 'REMOTE_USER' in /home/etxint/admin.etxint.com/auction/includes/global.php on line 11
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Undefined index: REMOTE_USER in /home/etxint/admin.etxint.com/auction/includes/global.php on line 11
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Use of undefined constant page - assumed 'page' in /home/etxint/admin.etxint.com/auction/main.php on line 179
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Undefined index: page in /home/etxint/admin.etxint.com/auction/main.php on line 179
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Use of undefined constant auction - assumed 'auction' in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 16
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Undefined index: auction in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 16
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Use of undefined constant tab - assumed 'tab' in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 16
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Undefined index: tab in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 16
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Use of undefined constant tab - assumed 'tab' in /home/etxint/admin.etxint.com/auction/includes/global.php on line 78
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Undefined index: tab in /home/etxint/admin.etxint.com/auction/includes/global.php on line 78
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Use of undefined constant tab - assumed 'tab' in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 30
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Undefined index: tab in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 30
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Use of undefined constant tab - assumed 'tab' in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 34
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Undefined index: tab in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 34
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Use of undefined constant tab - assumed 'tab' in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 60
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Undefined index: tab in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 60
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Use of undefined constant tab - assumed 'tab' in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 72
+[06-Dec-2016 05:49:32 UTC] PHP Notice:  Undefined index: tab in /home/etxint/admin.etxint.com/auction/includes/auctions.php on line 72
+[18-Jun-2019 02:22:12 UTC] PHP Deprecated:  mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/etxint/admin.etxint.com/auction/includes/global.php on line 7
+[18-Jun-2019 02:22:12 UTC] PHP Warning:  mysql_pconnect(): Access denied for user 'empireDB'@'localhost' (using password: YES) in /home/etxint/admin.etxint.com/auction/includes/global.php on line 7
+[26-Jun-2019 02:52:34 UTC] PHP Deprecated:  mysql_pconnect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/etxint/admin.etxint.com/auction/includes/global.php on line 7
+[26-Jun-2019 02:52:34 UTC] PHP Warning:  mysql_pconnect(): Access denied for user 'empireDB'@'localhost' (using password: YES) in /home/etxint/admin.etxint.com/auction/includes/global.php on line 7

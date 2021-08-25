@@ -1,0 +1,675 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" type="text/css" href="webeditor.css"> 
+<script>
+
+document.title = Text('colour_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+window.focus();
+var request = "" + window.location;
+editor = requestParameter("editor");
+
+function selectColour(value) {
+	document.forms[0].colour.value=value;
+}
+
+function setColour(value) {
+	try {
+		var attribute = request.replace(new RegExp("^.*\?.*[?&]attribute=([^&]+).*$", "i"), "$1");
+		window.opener[editor][attribute](value);
+	} catch(e) {
+	}
+	window.close();
+}
+
+function initColours() {
+	var colour = document.getElementsByTagName('TD');
+	for (var i=0; i<colour.length; i++) {
+		if (colour[i].className == "webeditor_colour") {
+			colour[i].onmouseover = webeditor_colour_mouseover;
+			colour[i].onmouseout = webeditor_colour_mouseout;
+			colour[i].onclick = webeditor_colour_click;
+		}
+	}
+}
+
+function webeditor_colour_mouseover() {
+	this.className = "webeditor_colour_mouseover";
+	window.status = this.id;
+}
+
+function webeditor_colour_mouseout() {
+	this.className = "webeditor_colour";
+}
+
+function webeditor_colour_click() {
+	selectColour(this.id);
+}
+
+</script>
+</head>
+<body bgcolor="white" onLoad="initColours();">
+<div align="center">
+<form>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tr> 
+    <td> 
+      <table>
+        <tr> 
+          <td id="#FFFFFF" bgcolor="#FFFFFF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#EEEEEE" bgcolor="#EEEEEE" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#DDDDDD" bgcolor="#DDDDDD" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#CCCCCC" bgcolor="#CCCCCC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#BBBBBB" bgcolor="#BBBBBB" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#FF0000" bgcolor="#FF0000" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF3300" bgcolor="#FF3300" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF6600" bgcolor="#FF6600" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF9900" bgcolor="#FF9900" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FFCC00" bgcolor="#FFCC00" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#FF0033" bgcolor="#FF0033" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF3333" bgcolor="#FF3333" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF6633" bgcolor="#FF6633" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF9933" bgcolor="#FF9933" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FFCC33" bgcolor="#FFCC33" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#FF0066" bgcolor="#FF0066" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF3366" bgcolor="#FF3366" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF6666" bgcolor="#FF6666" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF9966" bgcolor="#FF9966" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FFCC66" bgcolor="#FFCC66" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#FF0099" bgcolor="#FF0099" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF3399" bgcolor="#FF3399" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF6699" bgcolor="#FF6699" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF9999" bgcolor="#FF9999" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FFCC99" bgcolor="#FFCC99" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#FF00CC" bgcolor="#FF00CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF33CC" bgcolor="#FF33CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF66CC" bgcolor="#FF66CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FF99CC" bgcolor="#FF99CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#FFCCCC" bgcolor="#FFCCCC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#FFFF00" bgcolor="#FFFF00" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#FFFF33" bgcolor="#FFFF33" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#FFFF66" bgcolor="#FFFF66" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#FFFF99" bgcolor="#FFFF99" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#FFFFCC" bgcolor="#FFFFCC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#00FF00" bgcolor="#00FF00" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#00FF33" bgcolor="#00FF33" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#00FF66" bgcolor="#00FF66" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#00FF99" bgcolor="#00FF99" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#00FFCC" bgcolor="#00FFCC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#33FF00" bgcolor="#33FF00" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#33FF33" bgcolor="#33FF33" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#33FF66" bgcolor="#33FF66" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#33FF99" bgcolor="#33FF99" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#33FFCC" bgcolor="#33FFCC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#66FF00" bgcolor="#66FF00" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#66FF33" bgcolor="#66FF33" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#66FF66" bgcolor="#66FF66" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#66FF99" bgcolor="#66FF99" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#66FFCC" bgcolor="#66FFCC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#99FF00" bgcolor="#99FF00" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#99FF33" bgcolor="#99FF33" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#99FF66" bgcolor="#99FF66" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#99FF99" bgcolor="#99FF99" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#99FFCC" bgcolor="#99FFCC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#CCFF00" bgcolor="#CCFF00" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CCFF33" bgcolor="#CCFF33" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CCFF66" bgcolor="#CCFF66" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CCFF99" bgcolor="#CCFF99" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CCFFCC" bgcolor="#CCFFCC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#00FFFF" bgcolor="#00FFFF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#33FFFF" bgcolor="#33FFFF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#66FFFF" bgcolor="#66FFFF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#99FFFF" bgcolor="#99FFFF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#CCFFFF" bgcolor="#CCFFFF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#0000FF" bgcolor="#0000FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#0033FF" bgcolor="#0033FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#0066FF" bgcolor="#0066FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#0099FF" bgcolor="#0099FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#00CCFF" bgcolor="#00CCFF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#3300FF" bgcolor="#3300FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#3333FF" bgcolor="#3333FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#3366FF" bgcolor="#3366FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#3399FF" bgcolor="#3399FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#33CCFF" bgcolor="#33CCFF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#6600FF" bgcolor="#6600FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#6633FF" bgcolor="#6633FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#6666FF" bgcolor="#6666FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#6699FF" bgcolor="#6699FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#66CCFF" bgcolor="#66CCFF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#9900FF" bgcolor="#9900FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#9933FF" bgcolor="#9933FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#9966FF" bgcolor="#9966FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#9999FF" bgcolor="#9999FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#99CCFF" bgcolor="#99CCFF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#CC00FF" bgcolor="#CC00FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC33FF" bgcolor="#CC33FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC66FF" bgcolor="#CC66FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC99FF" bgcolor="#CC99FF" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CCCCFF" bgcolor="#CCCCFF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#FF00FF" bgcolor="#FF00FF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#FF33FF" bgcolor="#FF33FF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#FF66FF" bgcolor="#FF66FF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#FF99FF" bgcolor="#FF99FF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#FFCCFF" bgcolor="#FFCCFF" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <table>
+        <tr> 
+          <td id="#AAAAAA" bgcolor="#AAAAAA" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#999999" bgcolor="#999999" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#888888" bgcolor="#888888" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#777777" bgcolor="#777777" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#CC0000" bgcolor="#CC0000" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC3300" bgcolor="#CC3300" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC6600" bgcolor="#CC6600" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC9900" bgcolor="#CC9900" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#CC0033" bgcolor="#CC0033" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC3333" bgcolor="#CC3333" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC6633" bgcolor="#CC6633" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC9933" bgcolor="#CC9933" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#CC0066" bgcolor="#CC0066" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC3366" bgcolor="#CC3366" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC6666" bgcolor="#CC6666" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC9966" bgcolor="#CC9966" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#CC0099" bgcolor="#CC0099" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC3399" bgcolor="#CC3399" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC6699" bgcolor="#CC6699" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#CC9999" bgcolor="#CC9999" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#CCCC00" bgcolor="#CCCC00" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#CCCC33" bgcolor="#CCCC33" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#CCCC66" bgcolor="#CCCC66" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#CCCC99" bgcolor="#CCCC99" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#00CC00" bgcolor="#00CC00" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#00CC33" bgcolor="#00CC33" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#00CC66" bgcolor="#00CC66" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#00CC99" bgcolor="#00CC99" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#33CC00" bgcolor="#33CC00" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#33CC33" bgcolor="#33CC33" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#33CC66" bgcolor="#33CC66" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#33CC99" bgcolor="#33CC99" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#66CC00" bgcolor="#66CC00" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#66CC33" bgcolor="#66CC33" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#66CC66" bgcolor="#66CC66" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#66CC99" bgcolor="#66CC99" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#99CC00" bgcolor="#99CC00" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#99CC33" bgcolor="#99CC33" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#99CC66" bgcolor="#99CC66" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#99CC99" bgcolor="#99CC99" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#00CCCC" bgcolor="#00CCCC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#33CCCC" bgcolor="#33CCCC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#66CCCC" bgcolor="#66CCCC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#99CCCC" bgcolor="#99CCCC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#0000CC" bgcolor="#0000CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#0033CC" bgcolor="#0033CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#0066CC" bgcolor="#0066CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#0099CC" bgcolor="#0099CC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#3300CC" bgcolor="#3300CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#3333CC" bgcolor="#3333CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#3366CC" bgcolor="#3366CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#3399CC" bgcolor="#3399CC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#6600CC" bgcolor="#6600CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#6633CC" bgcolor="#6633CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#6666CC" bgcolor="#6666CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#6699CC" bgcolor="#6699CC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#9900CC" bgcolor="#9900CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#9933CC" bgcolor="#9933CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#9966CC" bgcolor="#9966CC" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#9999CC" bgcolor="#9999CC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#CC00CC" bgcolor="#CC00CC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#CC33CC" bgcolor="#CC33CC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#CC66CC" bgcolor="#CC66CC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#CC99CC" bgcolor="#CC99CC" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <table>
+        <tr> 
+          <td id="#666666" bgcolor="#666666" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#555555" bgcolor="#555555" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#444444" bgcolor="#444444" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#990000" bgcolor="#990000" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#993300" bgcolor="#993300" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#996600" bgcolor="#996600" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#990033" bgcolor="#990033" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#993333" bgcolor="#993333" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#996633" bgcolor="#996633" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#990066" bgcolor="#990066" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#993366" bgcolor="#993366" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#996666" bgcolor="#996666" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#999900" bgcolor="#999900" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#999933" bgcolor="#999933" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#999966" bgcolor="#999966" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#009900" bgcolor="#009900" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#009933" bgcolor="#009933" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#009966" bgcolor="#009966" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#339900" bgcolor="#339900" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#339933" bgcolor="#339933" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#339966" bgcolor="#339966" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#669900" bgcolor="#669900" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#669933" bgcolor="#669933" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#669966" bgcolor="#669966" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#009999" bgcolor="#009999" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#339999" bgcolor="#339999" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#669999" bgcolor="#669999" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#000099" bgcolor="#000099" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#003399" bgcolor="#003399" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#006699" bgcolor="#006699" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#330099" bgcolor="#330099" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#333399" bgcolor="#333399" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#336699" bgcolor="#336699" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#660099" bgcolor="#660099" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#663399" bgcolor="#663399" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#666699" bgcolor="#666699" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#990099" bgcolor="#990099" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#993399" bgcolor="#993399" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#996699" bgcolor="#996699" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <table>
+        <tr> 
+          <td id="#333333" bgcolor="#333333" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#222222" bgcolor="#222222" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#660000" bgcolor="#660000" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#663300" bgcolor="#663300" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#660033" bgcolor="#660033" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#663333" bgcolor="#663333" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#666600" bgcolor="#666600" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#666633" bgcolor="#666633" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#006600" bgcolor="#006600" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#006633" bgcolor="#006633" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#336600" bgcolor="#336600" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#336633" bgcolor="#336633" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#006666" bgcolor="#006666" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#336666" bgcolor="#336666" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#000066" bgcolor="#000066" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#003366" bgcolor="#003366" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#330066" bgcolor="#330066" class="webeditor_colour"><img width="1" height="1"></td>
+          <td id="#333366" bgcolor="#333366" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#660066" bgcolor="#660066" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+        <tr> 
+          <td id="#663366" bgcolor="#663366" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <table>
+        <tr> 
+          <td id="#111111" bgcolor="#111111" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#330000" bgcolor="#330000" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#333300" bgcolor="#333300" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#003300" bgcolor="#003300" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#003333" bgcolor="#003333" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#000033" bgcolor="#000033" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#330033" bgcolor="#330033" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td> 
+      <table>
+        <tr> 
+          <td id="#000000" bgcolor="#000000" class="webeditor_colour"><img width="1" height="1"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<input name="colour" type="text" size="10">
+<script>document.write('<input type="submit" value="' + Text('ok') + '" onClick="setColour(this.form.colour.value);">');</script>
+<script>document.write('<input type="button" value="' + Text('cancel') + '" onClick="window.close()">');</script>
+</form>
+</div>
+</body>
+</html>

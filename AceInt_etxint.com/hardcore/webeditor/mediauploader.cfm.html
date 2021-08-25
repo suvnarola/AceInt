@@ -1,0 +1,197 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" href="../dtree.css" type="text/css" />
+<script type="text/javascript" src="../dtree.js"></script>
+<link rel="stylesheet" type="text/css" href="../hardcore.css"> 
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('mediauploader_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+var request = "" + window.location;
+editor = requestParameter("editor");
+request_action = requestParameter("action");
+request_category = requestParameter("category");
+request_id = requestParameter("id");
+request_title = requestParameter("title");
+request_href = requestParameter("href");
+var mediaclass = '';
+
+function checkExtension(file){
+	if (file == "") { return false; }
+
+	var file_extension = file;
+	file_extension = file_extension.split(".");
+	file_extension = file_extension[file_extension.length - 1];
+	file_extension = file_extension.toLowerCase();
+
+	valid_extensions = "";
+	<cfif valid_extensions is not "">
+	valid_extensions = "<cfoutput>#valid_extensions#</cfoutput>";
+	</cfif>
+	if (valid_extensions != "") {
+		valid_extension = valid_extensions.split(",");
+		for (i=0; i<valid_extension.length; i++) {
+			if ( file_extension == valid_extension[i]) return true;
+		}
+		alert(Text('mediauploader_error') + ' ' + valid_extensions);
+	} else {
+		alert(Text('disabled'));
+	}
+	return false;
+}
+
+function getname(id, file, title){
+	if (document.upload.title.value == "") {
+		var file_name = file;
+		file_name = file_name.split("/");
+		file_name = file_name[file_name.length - 1];
+		file_name = file_name.split("\\");
+		file_name = file_name[file_name.length - 1];
+		document.upload.title.value = file_name;
+		title = file_name;
+	}
+	var title_extension = document.upload.title.value;
+	title_extension = title_extension.split(".");
+	if (title_extension.length == 1) {
+		var file_extension = file;
+		file_extension = file_extension.split(".");
+		file_extension = file_extension[file_extension.length - 1];
+		file_extension = file_extension.toLowerCase();
+		if (file_extension != "") {
+			document.upload.title.value = document.upload.title.value + "." + file_extension;
+			title = document.upload.title.value;
+		}
+	}
+	if (checkExtension(file) && checkExtension(title)){
+		if (file.substring(file.length-4) == ".swf") {
+			mediaclass = "flash";
+		} else if (file.substring(file.length-6) == ".class") {
+			mediaclass = "applet";
+		} else {
+			mediaclass = "image";
+		}
+		parent.mediapreview.location.href = 'mediapreview.cfm?editor=' + editor + '&title='+escape(title)+'&href='+escape('file:///'+file)+'&mediaclass='+mediaclass;
+		return true;
+	} else if ((title != "") && (file == "") && checkExtension(title)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function doSubmit() {
+	if ((document.upload.file.type == "hidden") || (getname(document.upload.id.value, document.upload.file.value, document.upload.title.value))) {
+		document.upload.attributes.action.nodeValue = document.upload.attributes.action.nodeValue + '&list=' + escape(parent.medialist.location.href) + '&mediaclass=' + mediaclass;
+		parent.medialist.medialistMenu.clearCookie();
+		parent.medialist.location.href = 'wait.html';
+		return true;
+	} else {
+		return false;
+	}
+}
+
+</script>
+</head>
+<body>
+
+<cfif ((upload_path is not "") and (enable_upload is "yes"))>
+
+<script>
+document.writeln('<form action="medianotification.cfm?editor=' + editor + '" method="POST" enctype="multipart/form-data" name="upload" onSubmit="return doSubmit();">');
+document.writeln('<input type="hidden" name="category" value="' + request_category + '">');
+document.writeln('<input type="hidden" name="old_title" value="' + request_title + '">');
+document.writeln('<input type="hidden" name="action" value="' + request_action + '">');
+if (request_action != "Create") {
+	document.writeln('<input type="hidden" name="id" value="' + request_id + '">');
+}
+</script>
+<input type="hidden" name="contentclass" value="image">
+
+<table width="100%" border="0" class="dtree">
+	<tr>
+<script>
+	if (request_action == "Create") {
+		document.writeln('<th colspan="2" align="left">' + Text('mediauploader_create_image') + '</th>');
+	} else if (request_action == "Update") {
+		document.writeln('<th colspan="2" align="left">' + Text('mediauploader_update_image') + '</th>');
+	} else if (request_action == "Delete") {
+		document.writeln('<th colspan="2" align="left">' + Text('mediauploader_delete_image') + '</th>');
+	}
+</script>
+<script>
+		document.writeln('<th width="50%" align="right">');
+		if (request_action == "Delete") {
+			document.writeln('<input type="submit" name="delete" value="' + Text('mediauploader_delete') + '">');
+		} else if (request_action == "Update") {
+			document.writeln('<input type="submit" name="update" value="' + Text('mediauploader_update') + '">');
+		} else {
+			document.writeln('<input type="submit" name="create" value="' + Text('mediauploader_create') + '">');
+		}
+		document.writeln('</th>');
+</script>
+	</tr>
+	<tr>
+		<td align="left" colspan="2"><script>document.write(Text('mediauploader_heading'));</script></td>
+		<td width="50%" align="left"><script>document.write(Text('mediauploader_file'));</script></td>
+	</tr>
+	<tr align="left" valign="top">
+		<td colspan="2">
+<script>
+		if (request_action == "Delete") {
+			document.writeln('<input disabled type="text" name="title" size="40" maxlength="250" value="' + request_title + '">');
+		} else {
+			document.writeln('<input type="text" name="title" size="40" maxlength="250" value="' + request_title + '">');
+		}
+</script>
+		</td>
+		<td width="50%">
+<script>
+		if (request_action == "Delete") {
+			document.writeln('<input type="hidden" name="file" value="">');
+			document.writeln('<input disabled type="text" name="href" size="40" maxlength="250" value="' + request_href + '">');
+		} else {
+			document.writeln('<input type="file" name="file" size="20" maxlength="256" align="middle">');
+			document.writeln('<input type="hidden" name="href" value="">');
+		}
+</script>
+		</td>
+	</tr>
+</table>
+
+</form>
+
+<cfelse>
+
+<table width="100%" height="100%" border="0">
+	<tr>
+		<td align="center" valign="middle">
+			<script>document.write(Text('mediauploader_disabled'));</script>
+		</td>
+	</tr>
+</table>
+
+</cfif>
+
+</body>
+</html>

@@ -1,0 +1,157 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('radiobutton_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+window.focus();
+var request = "" + window.location;
+editor = requestParameter("editor");
+
+function initform() {
+	document.forms[0].name.value = unescape(request.match(new RegExp("^.*\?.*[?&]name=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]name=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].value.value = unescape(request.match(new RegExp("^.*\?.*[?&]value=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]value=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].checked.value = unescape(request.match(new RegExp("^.*\?.*[?&]checked=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]checked=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].onclick.value = unescape(request.match(new RegExp("^.*\?.*[?&]onclick=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]onclick=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].onchange.value = unescape(request.match(new RegExp("^.*\?.*[?&]onchange=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]onchange=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].onfocus.value = unescape(request.match(new RegExp("^.*\?.*[?&]onfocus=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]onfocus=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].onblur.value = unescape(request.match(new RegExp("^.*\?.*[?&]onblur=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]onblur=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].htmlclass.value = unescape(request.match(new RegExp("^.*\?.*[?&]htmlclass=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]htmlclass=([^&]+).*$", "i"), "$1") : "");
+	document.forms[0].htmlid.value = unescape(request.match(new RegExp("^.*\?.*[?&]htmlid=([^&]+).*$", "i"), "$1") ? request.replace(new RegExp("^.*?.*[?&]htmlid=([^&]+).*$", "i"), "$1") : "");
+}
+
+function insertcheckbox(form) {
+	var type = form.type.value;
+	var name = form.name.value;
+	var value = form.value.value;
+	var checked = form.checked.value;
+	var onclick = form.onclick.value;
+	var onchange = form.onchange.value;
+	var onfocus = form.onfocus.value;
+	var onblur = form.onblur.value;
+	var htmlclass = form.htmlclass.value;
+	var htmlid = form.htmlid.value;
+	window.opener[editor].insertCheckbox(type,name,value,checked,onclick,onchange,onfocus,onblur,htmlclass,htmlid);
+	window.close();
+}
+
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="initform();">
+<form onSubmit="javascript:insertcheckbox(this); return false;">
+<input type="hidden" name="type" value="radio">
+<table width="100%" border="0" class="dtree">
+	<tr align="left" valign="top"> 
+		<td colspan="4" class="webeditor_window_title"><script>document.write(Text('radiobutton_title'));</script></td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('radiobutton_parameter'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('radiobutton_parameter_name'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="name" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('radiobutton_parameter_value'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="value" size="20" value="">
+						</td>
+					</tr>
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('radiobutton_parameter_checked'));</script></td>
+						<td class="webeditor_window_value"> 
+							<select name="checked">
+								<option value=""><script>document.write(Text('radiobutton_parameter_checked_no'));</script>
+								<option value="checked"><script>document.write(Text('radiobutton_parameter_checked_yes'));</script>
+							</select>
+						</td>
+						<td></td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('radiobutton_events'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('radiobutton_events_onclick'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="onclick" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('radiobutton_events_onchange'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="onchange" size="20" value="">
+						</td>
+					</tr>
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('radiobutton_events_onfocus'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="onfocus" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('radiobutton_events_onblur'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="onblur" size="20" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+	<tr align="left" valign="top"> 
+		<td colspan="4">
+			<fieldset>
+			<legend class="webeditor_window_heading"><script>document.write(Text('class_id'));</script></legend>
+				<table width="100%">
+					<tr>
+						<td class="webeditor_window_attribute"><script>document.write(Text('htmlclass'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="htmlclass" size="20" value="">
+						</td>
+						<td></td>
+						<td class="webeditor_window_attribute"><script>document.write(Text('htmlid'));</script></td>
+						<td class="webeditor_window_value"> 
+							<input type="text" name="htmlid" size="20" value="">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</td>
+	</tr>
+</table>
+<br>
+<div align="center">
+<script>document.write('<input type="submit" value="' + Text('ok') + '">');</script>
+<script>document.write('<input type="button" value="' + Text('cancel') + '" onClick="window.close()">');</script>
+</div>
+</form>
+</body>
+</html>

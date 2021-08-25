@@ -1,0 +1,31 @@
+[23-Apr-2017 07:05:06 UTC] PHP Parse error:  syntax error, unexpected ':', expecting ';' or '{' in /home/etxint/admin.etxint.com/temp/standardsqlrequest.php on line 722
+[23-Apr-2017 07:06:00 UTC] PHP Parse error:  syntax error, unexpected ':', expecting ';' or '{' in /home/etxint/admin.etxint.com/temp/standardsqlrequest.php on line 722
+[23-Apr-2017 07:06:20 UTC] PHP Parse error:  syntax error, unexpected ':', expecting ';' or '{' in /home/etxint/admin.etxint.com/temp/standardsqlrequest.php on line 722
+[23-Apr-2017 07:06:38 UTC] PHP Parse error:  syntax error, unexpected ':', expecting ';' or '{' in /home/etxint/admin.etxint.com/temp/standardsqlrequest.php on line 722
+[23-Apr-2017 07:06:52 UTC] PHP Parse error:  syntax error, unexpected ':', expecting ';' or '{' in /home/etxint/admin.etxint.com/temp/standardsqlrequest.php on line 722
+[23-Apr-2017 07:14:49 UTC] PHP Parse error:  syntax error, unexpected ':', expecting ';' or '{' in /home/etxint/admin.etxint.com/temp/standardsqlrequest.php on line 722
+[23-Apr-2017 07:15:58 UTC] PHP Parse error:  syntax error, unexpected ':', expecting ';' or '{' in /home/etxint/admin.etxint.com/temp/standardsqlrequest.php on line 722
+[23-Apr-2017 11:04:58 UTC] PHP Warning:  include_once(../includes/jollytel/debug.php): failed to open stream: No such file or directory in /home/etxint/admin.etxint.com/temp/members.php on line 12
+[23-Apr-2017 11:04:58 UTC] PHP Warning:  include_once(): Failed opening '../includes/jollytel/debug.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/etxint/admin.etxint.com/temp/members.php on line 12
+[23-Apr-2017 11:05:17 UTC] PHP Warning:  include_once(../includes/jollytel/debug.php): failed to open stream: No such file or directory in /home/etxint/admin.etxint.com/temp/members.php on line 12
+[23-Apr-2017 11:05:17 UTC] PHP Warning:  include_once(): Failed opening '../includes/jollytel/debug.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/etxint/admin.etxint.com/temp/members.php on line 12
+[23-Apr-2017 11:06:01 UTC] PHP Warning:  mysqli::mysqli(): (HY000/2003): Can't connect to MySQL server on '104.192.31.75' (110) in /home/etxint/admin.etxint.com/temp/members.php on line 25
+[23-Apr-2017 11:06:01 UTC] PHP Parse error:  syntax error, unexpected ':', expecting ';' or '{' in /home/etxint/admin.etxint.com/temp/standardsqlrequest.php on line 722
+[23-Apr-2017 11:06:20 UTC] PHP Warning:  mysqli::mysqli(): (HY000/2003): Can't connect to MySQL server on '104.192.31.75' (110) in /home/etxint/admin.etxint.com/temp/members.php on line 25
+[23-Apr-2017 11:06:20 UTC] PHP Parse error:  syntax error, unexpected ':', expecting ';' or '{' in /home/etxint/admin.etxint.com/temp/standardsqlrequest.php on line 722
+[23-Apr-2017 11:06:59 UTC] PHP Warning:  mysqli::mysqli(): (HY000/2003): Can't connect to MySQL server on '104.192.31.75' (110) in /home/etxint/admin.etxint.com/temp/members.php on line 21
+[23-Apr-2017 11:06:59 UTC] PHP Parse error:  syntax error, unexpected ':', expecting ';' or '{' in /home/etxint/admin.etxint.com/temp/standardsqlrequest.php on line 722
+[23-Apr-2017 11:07:12 UTC] PHP Warning:  mysqli::mysqli(): (HY000/2003): Can't connect to MySQL server on '104.192.31.75' (110) in /home/etxint/admin.etxint.com/temp/members.php on line 21
+[23-Apr-2017 11:07:12 UTC] PHP Warning:  include_once(../includes/jollytel/debug.php): failed to open stream: No such file or directory in /home/etxint/admin.etxint.com/temp/members.php on line 25
+[23-Apr-2017 11:07:12 UTC] PHP Warning:  include_once(): Failed opening '../includes/jollytel/debug.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/etxint/admin.etxint.com/temp/members.php on line 25
+[23-Apr-2017 11:07:33 UTC] PHP Warning:  mysqli::mysqli(): (HY000/2003): Can't connect to MySQL server on '104.192.31.75' (110) in /home/etxint/admin.etxint.com/temp/members.php on line 21
+[23-Apr-2017 11:07:33 UTC] PHP Warning:  include_once(../includes/jollytel/debug.php): failed to open stream: No such file or directory in /home/etxint/admin.etxint.com/temp/members.php on line 25
+[23-Apr-2017 11:07:33 UTC] PHP Warning:  include_once(): Failed opening '../includes/jollytel/debug.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/etxint/admin.etxint.com/temp/members.php on line 25
+[23-Apr-2017 11:08:35 UTC] PHP Warning:  mysqli::mysqli(): (HY000/2003): Can't connect to MySQL server on '104.192.31.75' (110) in /home/etxint/admin.etxint.com/temp/members.php on line 19
+[23-Apr-2017 11:12:24 UTC] PHP Parse error:  syntax error, unexpected ':', expecting ';' or '{' in /home/etxint/admin.etxint.com/temp/standardsqlrequest.php on line 722
+[23-Apr-2017 11:12:35 UTC] PHP Warning:  include_once(../includes/jollytel/debug.php): failed to open stream: No such file or directory in /home/etxint/admin.etxint.com/temp/members.php on line 24
+[23-Apr-2017 11:12:35 UTC] PHP Warning:  include_once(): Failed opening '../includes/jollytel/debug.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/etxint/admin.etxint.com/temp/members.php on line 24
+[23-Apr-2017 11:17:31 UTC] PHP Warning:  include_once(../includes/jollytel/debug.php): failed to open stream: No such file or directory in /home/etxint/admin.etxint.com/temp/members.php on line 24
+[23-Apr-2017 11:17:31 UTC] PHP Warning:  include_once(): Failed opening '../includes/jollytel/debug.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/etxint/admin.etxint.com/temp/members.php on line 24
+[23-Apr-2017 11:17:31 UTC] PHP Fatal error:  Class 'debug' not found in /home/etxint/admin.etxint.com/temp/members.php on line 44
+[23-Apr-2017 11:34:34 UTC] PHP Fatal error:  Allowed memory size of 268435456 bytes exhausted (tried to allocate 2048 bytes) in /home/etxint/admin.etxint.com/temp/members.php on line 59

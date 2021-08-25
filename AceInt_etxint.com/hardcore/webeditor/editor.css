@@ -1,0 +1,7 @@
+img, table, caption, thead, tbody, tfoot, tr, td, th, object, embed {
+	border: 1px dashed gray;
+}
+form {
+	border: 1px dashed red;
+}
+

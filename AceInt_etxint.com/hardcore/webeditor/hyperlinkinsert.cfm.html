@@ -1,0 +1,90 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Generator" content="HardCore Web Content Editor">
+<meta http-equiv="Copyright" content="(C) 2002-2004 - HardCore Internet Ltd. - www.hardcoreinternet.co.uk">
+<script src="webeditor.properties.js"></script>
+<title>HardCore Web Content Editor</title>
+<link rel="stylesheet" href="../dtree.css" type="text/css" />
+<script type="text/javascript" src="../dtree.js"></script>
+<link rel="stylesheet" type="text/css" href="../hardcore.css"> 
+<link rel="stylesheet" type="text/css" href="webeditor.css" />
+<script>
+
+document.title = Text('hyperlinkinsert_title');
+
+function requestParameter(name) {
+	var value = "";
+	if (start = request.indexOf("?"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	} else if (start = request.indexOf("&"+name+"=")+1) {
+		value = request.substring(start+name.length+1);
+	}
+	if (value.indexOf("&")+1) {
+		value = value.substring(0, value.indexOf("&"));
+	}
+	value = unescape(value);
+	return value;
+}
+
+var request = "" + window.location;
+editor = requestParameter("editor");
+request_focus = requestParameter("focus");
+request_action = requestParameter("action");
+request_title = requestParameter("title");
+
+function InitForm() {
+	document.myform.href.value = parent.tag["href"];
+	document.myform.target.value = parent.tag["target"];
+	document.myform.text.value = parent.tag["text"];
+	document.myform.htmlclass.value = parent.tag["htmlclass"];
+	document.myform.htmlid.value = parent.tag["htmlid"];
+}
+
+function insertHyperlink() {
+	top.opener[editor].insertHyperlink(document.myform.href.value, document.myform.target.value, document.myform.text.value, document.myform.htmlclass.value, document.myform.htmlid.value);
+	top.close();
+}
+
+</script>
+</head>
+<body onLoad="InitForm(); if (request_focus == 'true') self.focus();">
+
+<form id="myform" name="myform" onSubmit="javascript:insertHyperlink(); return false;">
+<input type="hidden" name="text" value="">
+<table width="100%" border="0" class="dtree">
+	<tr><th colspan="6" align="left"><script>document.write(Text('hyperlinkinsert_text'));</script></th></tr>
+	<tr>
+		<td align="left" colspan="6"><script>document.write(Text('hyperlinkinsert_address'));</script></td>
+	</tr>
+	<tr>
+		<td colspan="3"><input type="text" size="60" name="href" value="" onChange="parent.tag['href']=this.value"></td>
+		<td rowspan="2" align="center">
+			<script>document.write('<input type="button" name="insert_button" value="' + Text('ok') + '" onClick="javascript:insertHyperlink();">');</script>
+			<script>document.write('<input type="button" name="cancel_button" value="' + Text('cancel') + '" onClick="javascript:top.close();">');</script>
+		</td>
+	</tr>
+	<tr>
+		<td align="left"><script>document.write(Text('hyperlinkinsert_target'));</script></td>
+		<td align="left"><script>document.write(Text('htmlid'));</script></td>
+		<td align="left"><script>document.write(Text('htmlclass'));</script></td>
+	</tr>
+	<tr>
+		<td>
+			<select name="target" onChange="parent.tag['target']=this.value">
+				<option value="" selected>&nbsp;
+				<option value="_self"><script>document.write(Text('hyperlinkinsert_target_self'));</script>
+				<option value="_parent"><script>document.write(Text('hyperlinkinsert_target_parent'));</script>
+				<option value="_top"><script>document.write(Text('hyperlinkinsert_target_top'));</script>
+				<option value="_blank"><script>document.write(Text('hyperlinkinsert_target_blank'));</script>
+			</select>
+		</td>
+		<td><input type="text" size="5" name="htmlid" value="" onChange="parent.tag['htmlid']=this.value"></td>
+		<td><input type="text" size="5" name="htmlclass" value="" onChange="parent.tag['htmlclass']=this.value"></td>
+	</tr>
+	<tr><td></td><td></td><td></td><td width="100%"></td></tr>
+</table>
+</form>
+</body>
+</html>
